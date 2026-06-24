@@ -1,4 +1,4 @@
 interface:
   display_name: "Longform Industry Narrative Research"
-  short_description: "Source-backed longform industry narrative reports"
+  short_description: "Agent workflow for longform industry research"
   default_prompt: "Use $longform-industry-narrative-research to plan, research, draft, and finalize a source-backed industry narrative essay."

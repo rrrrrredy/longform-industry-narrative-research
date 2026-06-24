@@ -1,8 +1,8 @@
 # Longform Industry Narrative Research
 
-A Codex skill for producing source-backed, publishable longform industry narrative research.
+An agent skill for producing source-backed, publishable longform industry narrative research.
 
-This skill is designed for complex research-and-writing tasks where an agent must collect materials, structure evidence, analyze companies or actors, synthesize narrative mechanisms, and then rewrite the result into a clean author-facing article rather than a process report.
+This repository is packaged in a Codex-compatible skill format, but the method is agent-agnostic. It is designed for complex research-and-writing tasks where an AI agent must collect materials, structure evidence, analyze companies or actors, synthesize narrative mechanisms, and then rewrite the result into a clean author-facing article rather than a process report.
 
 It was distilled from a long AI industry narrative research project covering company narratives, founder interviews, podcasts, official blogs, media translation, market reports, advertising, pricing, talent flow, and cross-market China-overseas narrative diffusion.
 
@@ -56,7 +56,7 @@ longform-industry-narrative-research/
 
 ## Installation
 
-Clone this repository into your Codex skills directory.
+For Codex, clone this repository into your Codex skills directory. For other agent systems, reuse `SKILL.md` and the `references/` files as the agent's reusable workflow instructions.
 
 ### macOS / Linux
 
@@ -92,7 +92,7 @@ Use $longform-industry-narrative-research to review this draft and remove proces
 
 ## Writing Principles
 
-The skill pushes Codex to:
+The skill pushes an agent to:
 
 - decide the thesis before collecting more material
 - process sources by analytical use, not just by summary
@@ -113,9 +113,9 @@ It is a writing and research workflow skill for long, judgment-heavy industry an
 
 # 长篇产业叙事研究 Skill
 
-这是一个用于 Codex 的研究写作 skill，适合处理资料量大、周期长、需要形成可发布文章的产业研究任务。
+这是一个适用于 AI agent 的研究写作 skill，适合处理资料量大、周期长、需要形成可发布文章的产业研究任务。当前仓库采用 Codex-compatible skill 格式打包，但方法本身不是 Codex 专用。
 
-它的核心目标不是生成一份过程报告，而是帮助 Codex 完成：
+它的核心目标不是生成一份过程报告，而是帮助 agent 完成：
 
 - 资料收集
 - 来源管理
@@ -157,7 +157,7 @@ It is a writing and research workflow skill for long, judgment-heavy industry an
 
 ## 关键写作原则
 
-使用这个 skill 时，Codex 会被引导去：
+使用这个 skill 时，agent 会被引导去：
 
 - 先确定文章主线，再继续搜集资料
 - 把来源台账和正文写作分开
@@ -186,7 +186,7 @@ git clone https://github.com/rrrrrredy/longform-industry-narrative-research.git 
   ~/.codex/skills/longform-industry-narrative-research
 ```
 
-安装后重启 Codex，或开启一个新的 Codex 线程。
+使用 Codex 时，安装后重启 Codex，或开启一个新的 Codex 线程。其他 agent 系统可直接复用 `SKILL.md` 和 `references/` 中的方法说明。
 
 ## 示例提示词
 
@@ -212,7 +212,7 @@ Use $longform-industry-narrative-research to clean this draft and remove process
 4. 合稿时围绕主线重组。
 5. 最后做一次专门的“去过程化改写”。
 
-这个 skill 的重点，就是帮助 Codex 同时做到两件事：
+这个 skill 的重点，就是帮助 agent 同时做到两件事：
 
 - 后台证据可追溯；
 - 前台文章可阅读、可发布。

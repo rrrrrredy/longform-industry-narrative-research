@@ -1,11 +1,11 @@
 ---
 name: longform-industry-narrative-research
-description: Long-form, source-backed industry narrative research and publishing workflow. Use when Codex must research, structure, draft, revise, or finalize a substantial industry analysis essay or report, especially company-by-company narrative studies, AI/technology industry essays, cross-market narrative analysis, podcast/interview synthesis, source registry management, final-reader cleanup, and removing process/audit language from a publishable Chinese or bilingual longform article.
+description: Long-form, source-backed industry narrative research and publishing workflow for AI agents. Use when an agent must research, structure, draft, revise, or finalize a substantial industry analysis essay or report, especially company-by-company narrative studies, AI/technology industry essays, cross-market narrative analysis, podcast/interview synthesis, source registry management, final-reader cleanup, and removing process/audit language from a publishable Chinese or bilingual longform article. Packaged in a Codex-compatible skill format, but the method is agent-agnostic.
 ---
 
 # Longform Industry Narrative Research
 
-Use this skill to produce publishable longform industry narrative research, not a process report. The workflow keeps evidence management in the background and makes the final article read as an author's analysis.
+Use this agent skill to produce publishable longform industry narrative research, not a process report. The workflow keeps evidence management in the background and makes the final article read as an author's analysis. It is packaged as a Codex-compatible skill, but the method can be used by any agent system that supports reusable instructions, references, state files, and staged review.
 
 ## Core Rule
 
