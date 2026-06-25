@@ -1,37 +1,39 @@
-# Longform Industry Research Protocol
+# Industry Research Framework
 
-A protocol framework for longform, source-backed industry research and publishable writing by AI agents.
+A framework for longform, source-backed industry research and publishable writing by AI agents.
 
 It ships no scraper, data source, or fixed report template. Instead, it prescribes conventions for how an agent persists state, separates evidence from prose, avoids topic drift, schedules review, and turns a large research backend into a clean reader-facing article or report.
 
 Task State Source Registry Claim Discipline Staged Drafting Review Loop Reader Revision
 
-[Open protocol page](https://rrrrrredy.github.io/longform-industry-narrative-research/framework.html#fullmd)
+[Open framework page](https://rrrrrredy.github.io/industry-research-framework/framework.html#fullmd)
 
-The protocol page is the structured reading guide. `SKILL.md` is the authoritative agent instruction file. Files under `references/` are optional modules loaded only when the task needs that method, review loop, or writing guidance.
+The framework page is the structured reading guide. `SKILL.md` is the authoritative agent instruction file. Files under `references/` are optional modules loaded only when the task needs that method, review loop, or writing guidance.
 
-## 01 Motivation: Four Failure Modes
+## 01 Motivation: Five Failure Modes
 
-Longform research agents tend to fail in four recurring ways:
+Longform research agents tend to fail in five recurring ways:
 
 1. **Topic overfitting**: a method distilled from one project becomes falsely treated as the universal frame.
 2. **Process leakage**: the final article reads like a work log.
 3. **Evidence drift**: sources, claims, uncertainty, and author judgment collapse into one narrative.
 4. **False completion**: a partial milestone is reported as final completion before coverage, review, and reader-quality revision are done.
+5. **Depth collapse**: source counts and coverage checklists pass, but the finished report is too short or compressed for the expected research depth.
 
-Every mechanism in this protocol targets one of those failures.
+Every mechanism in this framework targets one of those failures.
 
 ## 02 Behavioral Constraints
 
-Hard rules of the protocol:
+Hard rules of the framework:
 
 - Deliverable first: if the output is an article or report, do not drift into system design.
 - State before scale: write task state before expanding source collection.
 - Evidence is not prose: registries and audit labels stay backstage.
+- Depth budget before drafting: define expected depth, rough length band, unit-level expansion plan, and what would count as too short.
 - Staged execution: plan, collect, analyze, draft, review, revise, then continue.
 - Optional lenses only: narrative analysis and horizontal-vertical analysis are tools, not default structure.
 - Review closes the loop: every audit finding becomes a revision action, downgraded claim, or explicit limitation.
-- Reader review comes last: improve readability after factual and coverage checks are stable.
+- Reader review comes last: improve readability after factual, coverage, structure, and depth checks are stable.
 
 ## 03 Architecture
 
@@ -91,6 +93,8 @@ Use state files to recover after context loss. Do not rely on chat history as th
 
 If one cycle adds no new evidence, case, counterexample, framework, or judgment, increment `stale_count`. If `stale_count >= 2`, pivot the structural angle rather than searching harder inside the same frame.
 
+For longform deliverables, source counts, claim counts, link counts, and file size are backend health signals only. They cannot substitute for a depth review. Before final assembly, compare the draft against the depth budget and expand thin units before reader review.
+
 ## 06 Analysis Lens Scheduling
 
 Choose the lens that fits the research question:
@@ -136,24 +140,25 @@ Before declaring completion:
 - Major claims trace back to sources or uncertainty records.
 - Facts, source claims, interpretations, and author judgments remain distinct.
 - Counter-evidence has been addressed.
-- Reader review has been run after factual and coverage review.
+- The draft meets the depth budget or explains why the original expected depth is no longer appropriate.
+- Reader review has been run after factual, coverage, structure, and depth review.
 - Final prose reads like an author's report, not an agent process report.
 
 Limits:
 
-- The protocol reduces citation and evidence errors; it does not eliminate them.
+- The framework reduces citation and evidence errors; it does not eliminate them.
 - Subagent review is a check, not external truth.
 - Optional lenses can overfit the report if used mechanically.
 - State files only work if updated during the task, not reconstructed after the fact.
 
 ## 10 Full SKILL.md
 
-The authoritative instruction file is [`SKILL.md`](./SKILL.md). The protocol page includes the full skill text in a copyable block.
+The authoritative instruction file is [`SKILL.md`](./SKILL.md). The framework page includes the full skill text in a copyable block.
 
 ## Repository Structure
 
 ```text
-longform-industry-narrative-research/
+industry-research-framework/
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
@@ -175,15 +180,15 @@ longform-industry-narrative-research/
 Clone or copy this repository into the directory where your agent system loads reusable skills or instruction bundles:
 
 ```bash
-git clone https://github.com/rrrrrredy/longform-industry-narrative-research.git \
-  ./agent-skills/longform-industry-research
+git clone https://github.com/rrrrrredy/industry-research-framework.git \
+  ./agent-skills/industry-research-framework
 ```
 
 For systems without a formal skill loader, use `SKILL.md` as the main instruction file and load files under `references/` only when the task requires them.
 
 ---
 
-# 中文说明：长篇产业研究框架
+# 中文说明：产业研究框架
 
 这是一个面向 AI agent 的长篇产业研究与写作框架，用于处理资料量大、周期长、需要形成可发布文章或研究报告的任务。
 
@@ -191,14 +196,15 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 
 框架页面是给读者看的结构化导览，`SKILL.md` 是 agent 实际使用的权威指令文件，`references/` 下的文件是按需加载的扩展模块。只有任务需要某个方法、审阅循环或写作规则时，才读取对应 reference。
 
-## 01 动机：四类常见失败
+## 01 动机：五类常见失败
 
-长篇研究任务中，agent 很容易出现四类问题：
+长篇研究任务中，agent 很容易出现五类问题：
 
 1. **方法过拟合**：从一个具体项目中提炼出的经验，被误当成所有研究任务的默认框架。
 2. **过程泄漏**：终稿不像作者写的研究文章，而像“我读取了什么材料、做了什么处理”的工作日志。
 3. **证据漂移**：事实、来源说法、媒体解释、不确定性和作者判断混在一起，最后很难追溯。
 4. **过早完成**：只完成一个局部阶段，就把它当成整体任务完成。
+5. **深度塌缩**：来源数量、覆盖清单和审阅记录看似合格，但成稿过短、过于压缩，没有达到任务应有的研究深度。
 
 这个框架里的状态文件、来源台账、判断台账、阶段审阅和读者修订，都是为了解决这些问题。
 
@@ -207,10 +213,11 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 - **交付物优先**：如果用户要的是文章或报告，不要偏移成系统设计、prompt 设计或流程说明。
 - **先建状态，再扩资料**：长任务必须把目标、范围、进度、发现、待核项写入文件，而不是只依赖聊天上下文。
 - **证据不是正文**：来源台账、审阅记录、访问失败、内部来源编号留在后台，不能直接污染终稿。
+- **先定深度，再写终稿**：在写作前明确预期篇幅、章节展开计划、重点单元的深度要求，以及什么情况属于“太短”。
 - **分阶段推进**：规划、收集、分析、写作、审阅、修订、更新状态，按阶段循环。
 - **方法按需选择**：叙事分析、横纵分析、资本分析、采用分析都是可选镜头，不是默认结构。
 - **审阅必须闭环**：每个审阅问题都要变成具体修改动作、降级后的判断，或明确的不确定性说明。
-- **读者视角最后介入**：先完成事实、覆盖和结构检查，再做可读性、节奏和理解负担优化。
+- **读者视角最后介入**：先完成事实、覆盖、结构和深度检查，再做可读性、节奏和理解负担优化。
 
 ## 03 研究后台与成稿
 
@@ -265,8 +272,10 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 
 完整框架页面在这里：
 
-[Longform Industry Research Protocol](https://rrrrrredy.github.io/longform-industry-narrative-research/framework.html#fullmd)
+[Industry Research Framework](https://rrrrrredy.github.io/industry-research-framework/framework.html#fullmd)
 
 仓库源码在这里：
 
-[rrrrrredy/longform-industry-narrative-research](https://github.com/rrrrrredy/longform-industry-narrative-research)
+[rrrrrredy/industry-research-framework](https://github.com/rrrrrredy/industry-research-framework)
+
+

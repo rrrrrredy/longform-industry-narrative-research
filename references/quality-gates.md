@@ -10,6 +10,7 @@ Use these gates before declaring any stage or final deliverable complete.
 - Required coverage is listed.
 - Out-of-scope claims are listed.
 - Evidence standard is defined.
+- Expected depth, rough length band, and unit-level expansion plan are defined.
 - Initial structure is drafted.
 
 ## Before Drafting
@@ -21,6 +22,7 @@ Use these gates before declaring any stage or final deliverable complete.
 - Uncertainty is explicit.
 - Analysis units are defined.
 - The draft thesis is written in one sentence.
+- The depth budget identifies which units need extended analysis and which can be brief.
 
 ## Every 20 Major Facts Or Judgments
 
@@ -43,6 +45,8 @@ Use these gates before declaring any stage or final deliverable complete.
 
 - Required units are covered.
 - Important omissions are either fixed or disclosed.
+- The draft meets the depth budget; if it does not, thin units are expanded before reader review.
+- Source count, claim count, link count, and file size are not used as proof of completion.
 - Repeated points are merged.
 - The synthesis is more than a summary.
 - Counter-evidence is integrated.
@@ -67,6 +71,7 @@ If reader review finds serious issues, revise and repeat. Cap reader-review cycl
 ## Before Public Delivery
 
 - The first page makes the main argument clear.
+- The report length and depth match the user's expectation for the assignment.
 - The final prose reads as the author's work, not an agent log.
 - Facts, source claims, interpretations, and judgments are not blurred.
 - Major judgments are traceable backstage.

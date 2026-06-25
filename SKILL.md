@@ -1,33 +1,35 @@
 ---
-name: longform-industry-narrative-research
-description: Protocol framework for longform, source-backed industry research and publishable writing by AI agents. Use when an agent must plan, collect, verify, analyze, draft, review, revise, and finalize a substantial industry, market, company, product, technology, policy, or ecosystem research article/report across multiple stages and many sources. Prescribes task state, source/claim/uncertainty registries, staged execution, optional analysis lenses, subagent review, reader-quality revision, and final prose cleanup. Do not use for quick factual answers, simple summaries, citation formatting only, spreadsheet-only work, or purely creative writing.
+name: industry-research-framework
+description: Framework for longform, source-backed industry research and publishable writing by AI agents. Use when an agent must plan, collect, verify, analyze, draft, review, revise, and finalize a substantial industry, market, company, product, technology, policy, or ecosystem research article/report across multiple stages and many sources. Prescribes task state, source/claim/uncertainty registries, depth budgeting, staged execution, optional analysis lenses, subagent review, reader-quality revision, and final prose cleanup. Do not use for quick factual answers, simple summaries, citation formatting only, spreadsheet-only work, or purely creative writing.
 ---
 
-# Longform Industry Research Protocol
+# Industry Research Framework
 
-This skill is a protocol framework for longform industry research and publishable writing. It ships no scraper, data source, or fixed report template; instead it prescribes conventions for how an AI agent persists state, separates evidence from prose, avoids topic drift, schedules review, and turns a large research backend into a clean reader-facing article or report.
+This skill is a framework for longform industry research and publishable writing. It ships no scraper, data source, or fixed report template; instead it prescribes conventions for how an AI agent persists state, separates evidence from prose, avoids topic drift, schedules review, and turns a large research backend into a clean reader-facing article or report.
 
 ## 1. Motivation
 
-Longform research agents tend to fail in four recurring ways:
+Longform research agents tend to fail in five recurring ways:
 
 1. Topic overfitting: a method distilled from one project becomes falsely treated as the universal frame.
 2. Process leakage: the final article reads like a work log, with phrases such as "the user provided" or "the material shows".
 3. Evidence drift: sources, claims, uncertainty, and author judgment collapse into one undifferentiated narrative.
 4. False completion: a partial milestone is reported as final completion before coverage, review, and reader-quality revision are done.
+5. Depth collapse: a report satisfies source counts and coverage checklists but is too short, compressed, or thin for the user's expected research depth.
 
-Every mechanism in this protocol targets one of those failures.
+Every mechanism in this framework targets one of those failures.
 
 ## 2. Behavioral Constraints
 
 1. Deliverable first: if the requested output is an article or report, do not drift into system design, prompt design, or workflow exposition.
 2. State before scale: for long tasks, write task state to files before expanding source collection.
 3. Evidence is not prose: registries, logs, audit labels, and access failures stay backstage unless the user requests an audit appendix.
-4. Staged execution: plan, collect, analyze, draft, review, revise, and update state before moving to the next unit.
-5. Section-level progress: write complex work by section, company, case, period, or argument; do not generate the whole report in one pass.
-6. Optional lenses only: narrative analysis, horizontal-vertical analysis, capital analysis, and adoption analysis are tools, not default structure.
-7. Review closes the loop: every audit finding must become a revision action, a downgraded claim, or an explicit limitation.
-8. Reader review comes last: improve readability only after factual, coverage, and structure checks are stable.
+4. Depth budget before drafting: record expected depth, rough length band, unit-level expansion plan, and what "too short" would mean for this task.
+5. Staged execution: plan, collect, analyze, draft, review, revise, and update state before moving to the next unit.
+6. Section-level progress: write complex work by section, company, case, period, or argument; do not generate the whole report in one pass.
+7. Optional lenses only: narrative analysis, horizontal-vertical analysis, capital analysis, and adoption analysis are tools, not default structure.
+8. Review closes the loop: every audit finding must become a revision action, a downgraded claim, or an explicit limitation.
+9. Reader review comes last: improve readability only after factual, coverage, structure, and depth checks are stable.
 
 ## 3. Architecture
 
@@ -78,6 +80,8 @@ For each stage:
 7. Update progress and define the next stage.
 
 If one cycle adds no new evidence, case, counterexample, framework, or judgment, increment `stale_count`. If `stale_count >= 2`, pivot the structural angle rather than merely searching harder.
+
+For longform deliverables, do not use source count, claim count, link count, or file size as completion substitutes. They are backend health signals, not proof that the finished report has enough depth. Before final assembly, compare the draft against the depth budget and expand thin units before reader review.
 
 ## 6. Source And Claim Discipline
 
@@ -163,12 +167,13 @@ Before declaring completion:
 2. Major claims trace back to sources or uncertainty records.
 3. Facts, source claims, interpretations, and author judgments remain distinct.
 4. Counter-evidence has been addressed.
-5. Reader review has been run after factual and coverage review.
-6. The final prose reads like an author's report, not an agent process report.
+5. The draft meets the depth budget or explicitly explains why the original expected depth is no longer appropriate.
+6. Reader review has been run after factual, coverage, structure, and depth review.
+7. The final prose reads like an author's report, not an agent process report.
 
 Limits:
 
-1. The protocol reduces citation and evidence errors; it does not eliminate them.
+1. The framework reduces citation and evidence errors; it does not eliminate them.
 2. Subagent review is a check, not external truth.
 3. Optional lenses can overfit the report if used mechanically.
 4. State files help recovery, but they only work if updated during the task, not reconstructed after the fact.
@@ -181,4 +186,6 @@ Limits:
 - Read `references/subagents-and-review-loop.md` before delegation or review.
 - Read `references/writing-style.md` before drafting or final cleanup.
 - Read `references/quality-gates.md` before stage completion or final delivery.
-- Read `references/postmortem-lessons.md` when adapting this protocol or diagnosing task drift.
+- Read `references/postmortem-lessons.md` when adapting this framework or diagnosing task drift.
+
+

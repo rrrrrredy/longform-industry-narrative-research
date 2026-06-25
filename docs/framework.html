@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Longform Industry Research Protocol</title>
-    <meta name="description" content="A protocol framework for source-backed longform industry research and publishable writing by AI agents.">
+    <title>Industry Research Framework</title>
+    <meta name="description" content="A framework for source-backed longform industry research and publishable writing by AI agents.">
     <style>
       :root {
         --bg: #f3efe6;
@@ -588,28 +588,28 @@
     <main class="shell">
       <header class="topbar">
         <nav>
-          <a href="https://github.com/rrrrrredy/longform-industry-narrative-research">Repository</a>
+          <a href="https://github.com/rrrrrredy/industry-research-framework">Repository</a>
           <a href="#fullmd">Full SKILL.md</a>
           <a href="#state">State Files</a>
         </nav>
-        <div>Open Protocol Spec / June 2026</div>
+        <div>Open Framework Spec / June 2026</div>
       </header>
 
       <section class="hero">
         <div class="hero-inner">
           <div>
-            <div class="crumb">Papers / Framework Protocol</div>
-            <h1>Longform Industry Research Protocol</h1>
-            <p class="lede">A protocol framework for source-backed longform industry research and publishable writing by AI agents. It defines how agents preserve state, discipline evidence, draft in stages, run review loops, and clean final prose.</p>
+            <div class="crumb">Papers / Research Framework</div>
+            <h1>Industry Research Framework</h1>
+            <p class="lede">A framework for source-backed longform industry research and publishable writing by AI agents. It defines how agents preserve state, discipline evidence, draft in stages, run review loops, and clean final prose.</p>
             <div class="hero-actions">
               <a class="button" href="#fullmd">Jump to full SKILL.md</a>
-              <a class="button secondary" href="https://github.com/rrrrrredy/longform-industry-narrative-research">View repository</a>
+              <a class="button secondary" href="https://github.com/rrrrrredy/industry-research-framework">View repository</a>
             </div>
           </div>
-          <aside class="spec-card" aria-label="Protocol metadata">
+          <aside class="spec-card" aria-label="Framework metadata">
             <div class="spec-item">
               <span class="spec-label">Type</span>
-              <span class="spec-value">Agent research protocol</span>
+              <span class="spec-value">Agent research framework</span>
             </div>
             <div class="spec-item">
               <span class="spec-label">Scope</span>
@@ -623,7 +623,7 @@
         </div>
       </section>
 
-      <div class="tagbar" aria-label="Protocol pillars">
+      <div class="tagbar" aria-label="Framework pillars">
         <span>Task State</span>
         <span>Source Registry</span>
         <span>Claim Discipline</span>
@@ -634,7 +634,7 @@
 
       <div class="layout">
         <aside class="toc" aria-label="Page navigation">
-          <div class="toc-title">Protocol Map</div>
+          <div class="toc-title">Framework Map</div>
           <a href="#motivation">01 Motivation</a>
           <a href="#constraints">02 Constraints</a>
           <a href="#architecture">03 Architecture</a>
@@ -652,8 +652,8 @@
             <div class="section-head">
               <div class="index">01</div>
               <div>
-                <h2>Motivation: Four Failure Modes</h2>
-                <p class="section-kicker">Longform research agents tend to fail in repeatable ways. The protocol exists to make those failures harder to repeat.</p>
+                <h2>Motivation: Five Failure Modes</h2>
+                <p class="section-kicker">Longform research agents tend to fail in repeatable ways. The framework exists to make those failures harder to repeat.</p>
               </div>
             </div>
             <div class="cards">
@@ -677,6 +677,11 @@
                 <h3>False Completion</h3>
                 <p>A partial milestone is reported as final completion before coverage, review, and reader revision are done.</p>
               </article>
+              <article class="card">
+                <div class="card-number">Failure 05</div>
+                <h3>Depth Collapse</h3>
+                <p>Source counts and coverage checklists pass, but the finished report is too short or compressed for the expected research depth.</p>
+              </article>
             </div>
           </section>
 
@@ -685,13 +690,14 @@
               <div class="index">02</div>
               <div>
                 <h2>Behavioral Constraints</h2>
-                <p class="section-kicker">Hard rules of the protocol, each induced from real failure modes in long research work.</p>
+                <p class="section-kicker">Hard rules of the framework, each induced from real failure modes in long research work.</p>
               </div>
             </div>
             <ol class="constraint-list">
               <li><div><strong>Deliverable first.</strong> If the output is an article or report, do not drift into system design.</div></li>
               <li><div><strong>State before scale.</strong> Write task state before expanding source collection.</div></li>
               <li><div><strong>Evidence is not prose.</strong> Registries and audit labels stay backstage.</div></li>
+              <li><div><strong>Depth budget before drafting.</strong> Define expected depth, rough length band, and unit-level expansion plan.</div></li>
               <li><div><strong>Staged execution.</strong> Plan, collect, analyze, draft, review, revise, then continue.</div></li>
               <li><div><strong>Optional lenses only.</strong> Narrative and horizontal-vertical analysis are tools, not default structure.</div></li>
               <li><div><strong>Review closes the loop.</strong> Every finding becomes a revision action, downgraded claim, or limitation.</div></li>
@@ -778,6 +784,7 @@
             </table>
             <div class="wide">
               <p>If one cycle adds no new evidence, case, counterexample, framework, or judgment, increment <code>stale_count</code>. If <code>stale_count &gt;= 2</code>, pivot the structural angle rather than searching harder inside the same frame.</p>
+              <p>For longform deliverables, source counts, claim counts, link counts, and file size are backend health signals only. They cannot replace a depth review.</p>
             </div>
           </section>
 
@@ -824,12 +831,13 @@
               <div class="index">08</div>
               <div>
                 <h2>Engineering Constraints</h2>
-                <p class="section-kicker">The protocol turns quality checks into mechanical habits instead of end-of-project reconstruction.</p>
+                <p class="section-kicker">The framework turns quality checks into mechanical habits instead of end-of-project reconstruction.</p>
               </div>
             </div>
             <ul class="rule-list">
               <li><strong>Claim boundary.</strong> Every important hard claim needs a confidence boundary.</li>
               <li><strong>Registry cadence.</strong> Every 20 important facts, figures, or judgments should update source and claim registries.</li>
+              <li><strong>Depth gate.</strong> A final report must meet the depth budget; registry completeness alone is not completion.</li>
               <li><strong>Official source limit.</strong> Official materials show stated position; they do not prove adoption.</li>
               <li><strong>Media source limit.</strong> Media materials show public framing; they need corroboration for hard facts.</li>
               <li><strong>Community source limit.</strong> User/community evidence shows reception; it is not automatically representative.</li>
@@ -842,14 +850,14 @@
               <div class="index">09</div>
               <div>
                 <h2>Validation And Limits</h2>
-                <p class="section-kicker">The protocol improves reliability, but it does not make an agent immune to bad sources, weak reasoning, or unsupported claims.</p>
+                <p class="section-kicker">The framework improves reliability, but it does not make an agent immune to bad sources, weak reasoning, or unsupported claims.</p>
               </div>
             </div>
             <div class="cards">
               <article class="card">
                 <div class="card-number">Completion Gate</div>
                 <h3>Before final delivery</h3>
-                <p>Required coverage is complete or explicitly bounded; major claims trace back to sources or uncertainty records; counter-evidence has been addressed.</p>
+                <p>Required coverage is complete or explicitly bounded; major claims trace back to sources or uncertainty records; counter-evidence and depth expectations have been addressed.</p>
               </article>
               <article class="card dark">
                 <div class="card-number">Limits</div>
@@ -869,55 +877,49 @@
               <button class="copybtn" type="button" onclick="copySkill()">Copy</button>
             </div>
             <pre id="skilltext"><code>---
-name: longform-industry-narrative-research
-description: Protocol framework for longform, source-backed industry research and publishable writing by AI agents. Use when an agent must plan, collect, verify, analyze, draft, review, revise, and finalize a substantial industry, market, company, product, technology, policy, or ecosystem research article/report across multiple stages and many sources. Prescribes task state, source/claim/uncertainty registries, staged execution, optional analysis lenses, subagent review, reader-quality revision, and final prose cleanup. Do not use for quick factual answers, simple summaries, citation formatting only, spreadsheet-only work, or purely creative writing.
+name: industry-research-framework
+description: Framework for longform, source-backed industry research and publishable writing by AI agents. Use when an agent must plan, collect, verify, analyze, draft, review, revise, and finalize a substantial industry, market, company, product, technology, policy, or ecosystem research article/report across multiple stages and many sources. Prescribes task state, source/claim/uncertainty registries, depth budgeting, staged execution, optional analysis lenses, subagent review, reader-quality revision, and final prose cleanup. Do not use for quick factual answers, simple summaries, citation formatting only, spreadsheet-only work, or purely creative writing.
 ---
 
-# Longform Industry Research Protocol
+# Industry Research Framework
 
-This skill is a protocol framework for longform industry research and publishable writing. It ships no scraper, data source, or fixed report template; instead it prescribes conventions for how an AI agent persists state, separates evidence from prose, avoids topic drift, schedules review, and turns a large research backend into a clean reader-facing article or report.
+This skill is a framework for longform industry research and publishable writing. It ships no scraper, data source, or fixed report template; instead it prescribes conventions for how an AI agent persists state, separates evidence from prose, avoids topic drift, schedules review, and turns a large research backend into a clean reader-facing article or report.
 
 ## 1. Motivation
 
-Longform research agents tend to fail in four recurring ways:
+Longform research agents tend to fail in five recurring ways:
 
 1. Topic overfitting: a method distilled from one project becomes falsely treated as the universal frame.
-2. Process leakage: the final article reads like a work log, with phrases such as "the user provided" or "the material shows".
+2. Process leakage: the final article reads like a work log, with phrases such as &quot;the user provided&quot; or &quot;the material shows&quot;.
 3. Evidence drift: sources, claims, uncertainty, and author judgment collapse into one undifferentiated narrative.
 4. False completion: a partial milestone is reported as final completion before coverage, review, and reader-quality revision are done.
+5. Depth collapse: a report satisfies source counts and coverage checklists but is too short, compressed, or thin for the user&#39;s expected research depth.
 
-Every mechanism in this protocol targets one of those failures.
+Every mechanism in this framework targets one of those failures.
 
 ## 2. Behavioral Constraints
 
 1. Deliverable first: if the requested output is an article or report, do not drift into system design, prompt design, or workflow exposition.
 2. State before scale: for long tasks, write task state to files before expanding source collection.
 3. Evidence is not prose: registries, logs, audit labels, and access failures stay backstage unless the user requests an audit appendix.
-4. Staged execution: plan, collect, analyze, draft, review, revise, and update state before moving to the next unit.
-5. Section-level progress: write complex work by section, company, case, period, or argument; do not generate the whole report in one pass.
-6. Optional lenses only: narrative analysis, horizontal-vertical analysis, capital analysis, and adoption analysis are tools, not default structure.
-7. Review closes the loop: every audit finding must become a revision action, a downgraded claim, or an explicit limitation.
-8. Reader review comes last: improve readability only after factual, coverage, and structure checks are stable.
+4. Depth budget before drafting: record expected depth, rough length band, unit-level expansion plan, and what &quot;too short&quot; would mean for this task.
+5. Staged execution: plan, collect, analyze, draft, review, revise, and update state before moving to the next unit.
+6. Section-level progress: write complex work by section, company, case, period, or argument; do not generate the whole report in one pass.
+7. Optional lenses only: narrative analysis, horizontal-vertical analysis, capital analysis, and adoption analysis are tools, not default structure.
+8. Review closes the loop: every audit finding must become a revision action, a downgraded claim, or an explicit limitation.
+9. Reader review comes last: improve readability only after factual, coverage, structure, and depth checks are stable.
 
 ## 3. Architecture
 
     Main Agent
-      owns thesis, structure, final judgment
+    owns thesis, structure, final judgment
 
-    Research Backend
-      state files
-      source registry
-      claim registry
-      uncertainty list
-      review logs
-
-    Publishing Frontend
-      thesis
-      analytical sections
-      synthesis
-      counter-evidence
-      reader-facing references
-      final prose cleanup
+    Research Backend   Publishing Frontend
+    state files        thesis / sections
+    source registry    mechanisms / synthesis
+    claim registry     counter-evidence
+    uncertainty list   reader-facing references
+    review logs        final prose cleanup
 
 Subagents may inspect or challenge bounded parts of the backend, but the main agent owns the argument and final prose.
 
@@ -926,15 +928,15 @@ Subagents may inspect or challenge bounded parts of the backend, but the main ag
 For substantial work, create:
 
     {task}/state/
-      task_spec.md
-      progress.json
-      findings.jsonl
-      directions_tried.json
-      iteration_log.jsonl
+      task_spec.md            # objective, reader, scope, evidence standard
+      progress.json           # stage, completed units, open issues, stale_count
+      findings.jsonl          # append-only findings and judgments
+      directions_tried.json   # directions already attempted
+      iteration_log.jsonl     # stage summaries
 
     {task}/logs/
-      work.jsonl
-      review.jsonl
+      work.jsonl              # execution decisions
+      review.jsonl            # review findings and routed fixes
 
     {task}/data/
       source_registry.csv
@@ -955,7 +957,9 @@ For each stage:
 6. Revise the section and registries.
 7. Update progress and define the next stage.
 
-If one cycle adds no new evidence, case, counterexample, framework, or judgment, increment stale_count. If stale_count &gt;= 2, pivot the structural angle rather than merely searching harder.
+If one cycle adds no new evidence, case, counterexample, framework, or judgment, increment `stale_count`. If `stale_count &gt;= 2`, pivot the structural angle rather than merely searching harder.
+
+For longform deliverables, do not use source count, claim count, link count, or file size as completion substitutes. They are backend health signals, not proof that the finished report has enough depth. Before final assembly, compare the draft against the depth budget and expand thin units before reader review.
 
 ## 6. Source And Claim Discipline
 
@@ -992,7 +996,7 @@ Choose the lens that fits the research question:
 
 Pick one primary lens and at most two secondary lenses unless the user explicitly requests a multi-method report.
 
-Read references/optional-analysis-lenses.md when choosing lenses. Read references/horizontal-vertical-analysis.md only after that lens has been selected.
+Read `references/optional-analysis-lenses.md` when choosing lenses. Read `references/horizontal-vertical-analysis.md` only after that lens has been selected.
 
 ## 8. Subagent Scheduling
 
@@ -1008,7 +1012,7 @@ Use subagents only for bounded work:
 
 A subagent prompt must include objective, files or sections to inspect, output format, PASS/FAIL criteria, and boundaries. Subagents should not rewrite the whole report or own the thesis.
 
-Read references/subagents-and-review-loop.md before delegation.
+Read `references/subagents-and-review-loop.md` before delegation.
 
 ## 9. Finalization
 
@@ -1027,10 +1031,10 @@ Remove:
 - visible source IDs
 - audit labels
 - file paths
-- "the user provided"
-- "the material shows"
-- "this source supplements"
-- "this section passed audit"
+- &quot;the user provided&quot;
+- &quot;the material shows&quot;
+- &quot;this source supplements&quot;
+- &quot;this section passed audit&quot;
 - excessive caveats that weaken rather than clarify judgment
 
 ## 10. Validation And Limits
@@ -1041,29 +1045,33 @@ Before declaring completion:
 2. Major claims trace back to sources or uncertainty records.
 3. Facts, source claims, interpretations, and author judgments remain distinct.
 4. Counter-evidence has been addressed.
-5. Reader review has been run after factual and coverage review.
-6. The final prose reads like an author's report, not an agent process report.
+5. The draft meets the depth budget or explicitly explains why the original expected depth is no longer appropriate.
+6. Reader review has been run after factual, coverage, structure, and depth review.
+7. The final prose reads like an author&#39;s report, not an agent process report.
 
 Limits:
 
-1. The protocol reduces citation and evidence errors; it does not eliminate them.
+1. The framework reduces citation and evidence errors; it does not eliminate them.
 2. Subagent review is a check, not external truth.
 3. Optional lenses can overfit the report if used mechanically.
 4. State files help recovery, but they only work if updated during the task, not reconstructed after the fact.
 
 ## References
 
-- Read references/research-workflow.md before starting or restarting a complex project.
-- Read references/optional-analysis-lenses.md when selecting analysis lenses.
-- Read references/horizontal-vertical-analysis.md only when horizontal-vertical analysis is selected.
-- Read references/subagents-and-review-loop.md before delegation or review.
-- Read references/writing-style.md before drafting or final cleanup.
-- Read references/quality-gates.md before stage completion or final delivery.
-- Read references/postmortem-lessons.md when adapting this protocol or diagnosing task drift.</code></pre>
+- Read `references/research-workflow.md` before starting or restarting a complex project.
+- Read `references/optional-analysis-lenses.md` when selecting analysis lenses.
+- Read `references/horizontal-vertical-analysis.md` only when horizontal-vertical analysis is selected.
+- Read `references/subagents-and-review-loop.md` before delegation or review.
+- Read `references/writing-style.md` before drafting or final cleanup.
+- Read `references/quality-gates.md` before stage completion or final delivery.
+- Read `references/postmortem-lessons.md` when adapting this framework or diagnosing task drift.
+
+
+</code></pre>
           </section>
 
           <footer>
-            Longform Industry Research Protocol / Open Spec / June 2026
+            Industry Research Framework / Open Spec / June 2026
           </footer>
         </div>
       </div>
@@ -1081,3 +1089,7 @@ Limits:
     </script>
   </body>
 </html>
+
+
+
+

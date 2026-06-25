@@ -20,6 +20,7 @@ These lessons were distilled from a demanding longform industry research project
 - Subagents sometimes echoed the main agent's assumptions instead of independently checking them.
 - Large registries were useful backstage but unreadable as public appendices.
 - Declaring completion after a partial milestone caused false closure.
+- A forward test can pass state-file and registry checks while still producing a report that is too short. Backend completeness is not the same thing as publishable depth.
 
 ## User Preference Pattern
 
@@ -28,6 +29,7 @@ For long research writing, the preferred output is:
 - thesis-led
 - evidence-backed
 - detailed where complexity requires it
+- explicit about expected depth before drafting
 - written section by section
 - clean of process language
 - explicit about uncertainty without becoming defensive

@@ -13,6 +13,7 @@ Before collecting more material, write:
 - required coverage
 - excluded claims
 - minimum evidence standard
+- expected depth, rough length band, and unit-level expansion plan
 - planned source categories
 - staged structure
 - completion criteria
@@ -101,7 +102,20 @@ For each unit, write an analysis card:
 
 Do not average length across units. Allocate space according to importance, evidence richness, and complexity.
 
-## 6. Staged Execution
+## 6. Depth Planning
+
+Before drafting a longform deliverable, define:
+
+- expected reader: executive, practitioner, investor, researcher, public reader, or mixed
+- expected output depth: briefing, standard report, deep report, or publishable longform article
+- rough length band or section-level expansion target
+- units that require extended treatment because they are central, complex, controversial, or evidence-rich
+- units that may be intentionally short and why
+- signals that the draft is too compressed, such as shallow mechanism explanation, list-like company coverage, missing counter-evidence, or no synthesis beyond a comparison table
+
+Do not use source count, claim count, link count, registry completeness, or file size as a substitute for depth. A report can be evidence-complete and still be too short for the assignment.
+
+## 7. Staged Execution
 
 For each stage:
 
@@ -113,7 +127,7 @@ For each stage:
 
 Do not treat a partial-stage pass as whole-project completion.
 
-## 7. Assembly
+## 8. Assembly
 
 Assemble around the argument:
 

@@ -1,4 +1,6 @@
 interface:
-  display_name: "Longform Industry Research"
-  short_description: "Source-backed longform research workflow"
-  default_prompt: "Use $longform-industry-narrative-research to plan, research, draft, review, and finalize a source-backed industry research article."
+  display_name: "Industry Research Framework"
+  short_description: "Source-backed longform research with depth budgeting"
+  default_prompt: "Use $industry-research-framework to plan, research, draft, review, and finalize a source-backed industry research article with explicit depth budgeting."
+
+
