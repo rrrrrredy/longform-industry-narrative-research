@@ -1,77 +1,93 @@
 # Writing Style
 
+Use this file before drafting, rewriting, or finalizing.
+
 ## Voice
 
-Use author voice. The article should sound like a finished industry essay, not an assistant work log.
+Write as the author of a finished research article, not as an assistant reporting a work process.
 
-Avoid process-first phrases:
+Avoid:
 
 - "the user provided"
-- "this material supplements"
-- "the source shows"
+- "the material shows"
+- "this source supplements"
 - "based on the collected materials"
-- "the report uses"
 - "the evidence registry"
 - "this section passed audit"
+- "I searched"
+- "I processed"
 
-Use analysis-first phrasing:
+Prefer:
 
-- "The company's real move is..."
-- "The narrative changes behavior in three places..."
-- "The important shift is not X, but Y..."
-- "The counter-narrative is..."
-- "This matters because..."
+- direct claims
+- precise mechanisms
+- clear comparisons
+- explicit uncertainty where it affects judgment
+- concise source attribution when needed
+- reader-facing implications
+
+## Structure
+
+For long reports, prefer:
+
+1. conclusion-first key insights
+2. scope note
+3. sections organized by argument, case, company, period, or mechanism
+4. synthesis section that does more than summarize
+5. counter-evidence or boundary section
+6. reader-facing reference appendix
+
+Do not make the article follow the order in which sources were collected.
 
 ## Chinese Longform Preferences
 
 For Chinese final articles:
 
 - Use clean section titles.
-- Prefer conclusion-first core insights.
+- Put the strongest insights near the beginning.
 - Use numbered insights when the opening is dense.
-- Keep English technical terms only when they are industry terms: agent, workflow, API, benchmark, open-weight.
-- Avoid overexplaining that sources are uncertain; express the boundary as part of the judgment.
-- Do not show source IDs in body text.
-- Put reader-facing references at the end.
+- Keep English technical terms only when they are real industry terms.
+- Replace translationese with natural Chinese.
+- Avoid overexplaining the research process.
+- Do not show internal source IDs in the body.
+- Put references at the end by reader-facing category.
 
-## Rewrite Rules
+## English Longform Preferences
 
-Replace process language:
+For English final articles:
 
-- "用户提供的材料说明..." -> "中文语境中，这一问题通常被理解为..."
-- "材料补充了..." -> "这一视角使问题从 X 转向 Y..."
-- "来源显示..." -> "更关键的是..."
-- "证据缺口说明..." -> "这里的边界在于..."
+- Prefer concrete nouns and active verbs.
+- Avoid consulting-style filler.
+- Explain why a fact changes the argument.
+- Use caveats sparingly but clearly.
+- Keep paragraphs purposeful; avoid source-by-source narration.
 
-Reduce defensive repetition:
+## Process-Language Cleanup
 
-- Avoid repeating "cannot prove" after every paragraph.
-- State the boundary once, then continue the argument.
-- Do not let caveats dominate the thesis.
+Replace:
 
-## Reference Appendix
+- "the user-provided material says..." -> "In the available discussion, this issue is usually framed as..."
+- "the source shows..." -> "The important point is..."
+- "this material supplements..." -> "This shifts the analysis from X to Y..."
+- "the evidence gap means..." -> "The boundary of the claim is..."
+- "this report will..." -> use a direct section transition or remove it
 
-For a public article, references should be readable:
+## References
+
+For public writing, references should be readable:
 
 - category
-- source type or organization
+- organization or source type
 - title
 
-Do not include:
+Do not include internal source IDs, file paths, access status, or audit grades unless the user asks for an audit appendix.
 
-- URLs, unless the user wants clickable references
-- access status
-- evidence grades
-- internal source IDs
-- raw file paths
+Example categories:
 
-Good categories:
-
-- official websites, blogs, and docs
-- technical reports, papers, model cards, repositories
-- overseas podcasts and interviews
-- domestic podcasts and Chinese longform interviews
-- industry reports, capital reports, market data, advertising
-- media coverage and counter-narratives
-- talent flow and organizational migration
-- community/developer discussions
+- official websites, filings, blogs, docs, and reports
+- papers, technical reports, datasets, repositories
+- interviews, talks, podcasts, and public speeches
+- industry reports, market data, pricing, and financial materials
+- media coverage and longform commentary
+- user, developer, and community discussions
+- criticism, failures, disputes, and counter-evidence

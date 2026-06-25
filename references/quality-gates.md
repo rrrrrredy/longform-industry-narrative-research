@@ -1,51 +1,75 @@
 # Quality Gates
 
+Use these gates before declaring any stage or final deliverable complete.
+
+## Before Collection
+
+- Objective is explicit.
+- Target reader is explicit.
+- Final output type and language are explicit.
+- Required coverage is listed.
+- Out-of-scope claims are listed.
+- Evidence standard is defined.
+- Initial structure is drafted.
+
 ## Before Drafting
 
-- The thesis is written in one sentence.
-- The target reader is explicit.
-- The company or actor list is final for the current stage.
-- Source categories are defined.
-- The article structure is known.
+- Source categories are mapped to the research question.
+- Important sources are logged.
+- Access failures are recorded.
+- Claims are separated from sources.
+- Uncertainty is explicit.
+- Analysis units are defined.
+- The draft thesis is written in one sentence.
 
-## Before Finishing A Company Block
+## Every 20 Major Facts Or Judgments
 
-Check:
+- Update `source_registry.csv`.
+- Update `claims_registry.csv`.
+- Update `uncertainty_registry.csv` if needed.
+- Check whether any claim depends on a weak or inaccessible source.
+- Remove or downgrade claims that cannot be supported.
 
-- growth history is present
-- narrative position is explicit
-- construction mechanism is concrete
-- diffusion channels are named
-- market/developer/media/capital/society effects are covered when relevant
-- counter-narrative is present
-- no process language remains
+## Before Completing A Section
+
+- The section has a local thesis.
+- Evidence supports the thesis rather than merely filling space.
+- Mechanisms are explained.
+- Counter-evidence is handled where relevant.
+- The section advances the whole argument.
+- No internal source IDs or process language remain.
 
 ## Before Final Assembly
 
-Check:
+- Required units are covered.
+- Important omissions are either fixed or disclosed.
+- Repeated points are merged.
+- The synthesis is more than a summary.
+- Counter-evidence is integrated.
+- The reference appendix is reader-facing.
 
-- all required companies or actors are covered
-- commonality and divergence are synthesized
-- podcasts/interviews/media are integrated, not parked in a separate summary
-- counter-narratives are integrated
-- claims are traceable backstage
-- body has no visible source IDs
+## Reader Review Gate
+
+Run this only after factual, coverage, and structure review.
+
+Assess:
+
+- readability
+- cognitive load
+- continuity
+- friction points
+- research-report quality
+
+Reader review may revise ordering, transitions, paragraph density, titles, and wording. It must not invent facts or silently change evidence boundaries.
+
+If reader review finds serious issues, revise and repeat. Cap reader-review cycles at three unless the user asks for more.
 
 ## Before Public Delivery
 
-Run a "frontstage cleanup" pass:
-
-- remove "user provided"
-- remove "material shows" when it weakens author voice
-- remove "supplementary material"
-- remove audit status and source processing language
-- remove "this report" overuse
-- remove redundant caveats
-- convert source appendix to categories and titles
-
-Reader test:
-
-- Can a reader understand the thesis in the first page?
-- Does each company have a distinct role?
-- Are the mechanisms clearer than the raw facts?
-- Does the article read as a finished argument rather than a research diary?
+- The first page makes the main argument clear.
+- The final prose reads as the author's work, not an agent log.
+- Facts, source claims, interpretations, and judgments are not blurred.
+- Major judgments are traceable backstage.
+- No visible audit labels, file paths, or source IDs remain in the body.
+- Remaining limitations are stated cleanly when they matter.
+- A completion note exists if the user needs one.

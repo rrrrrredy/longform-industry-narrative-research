@@ -1,43 +1,44 @@
 # Postmortem Lessons
 
-These lessons came from a long AI company narrative research project.
+These lessons were distilled from a demanding longform industry research project and generalized for future research-writing tasks.
 
 ## What Worked
 
-- State files and registries prevented context loss.
-- Company-by-company stages improved quality.
-- Subagent audits caught coverage and evidence problems.
-- Podcast and interview materials were most useful when treated as narrative translation, not factual summaries.
-- WeChat and Chinese longform pieces were valuable because they showed how global narratives were reinterpreted locally.
-- A final reader-facing rewrite dramatically improved publishability.
+- State files prevented context loss.
+- Source, claim, and uncertainty registries reduced unsupported claims.
+- Section-by-section writing produced better work than one-shot generation.
+- Review logs were useful only when every issue was routed to a concrete revision.
+- Reader-facing cleanup made the final piece feel like a publishable article rather than a work report.
+- Counter-evidence improved the argument when integrated into analysis instead of parked at the end.
 
 ## What Failed Or Was Risky
 
-- Too much process scaffolding leaked into the article.
-- The task drifted toward system design and agent architecture before being corrected.
-- Overusing "source/material/user provided" made the article sound like an assistant report.
-- Evidence caveats became repetitive and weakened the author's judgment.
-- Large source registries were useful backstage but unreadable as final appendices.
-- Trying to complete the whole report in one pass reduced quality.
+- The task drifted into system design even though the desired output was a research article.
+- Too much process scaffolding leaked into prose.
+- Repeated phrases such as "user-provided material" and "the source shows" weakened author voice.
+- Treating one topic-specific project as the universal method overfit the skill.
+- Subagents sometimes echoed the main agent's assumptions instead of independently checking them.
+- Large registries were useful backstage but unreadable as public appendices.
+- Declaring completion after a partial milestone caused false closure.
 
 ## User Preference Pattern
 
-For this kind of work, the preferred output is:
+For long research writing, the preferred output is:
 
-- long, detailed, analytical
-- company-by-company or section-by-section
-- conclusion-first
-- strong thesis and main line
-- no visible citation IDs in body
-- no process explanations
-- no prompt-engineering or system-design drift
-- references grouped by reader-facing categories
+- thesis-led
+- evidence-backed
+- detailed where complexity requires it
+- written section by section
+- clean of process language
+- explicit about uncertainty without becoming defensive
+- supported by reader-facing references
+- reviewed for both factual discipline and reading experience
 
 ## Method Pattern
 
 Use a two-layer system:
 
 1. Research backend: sources, claims, uncertainty, logs, review.
-2. Publishing frontend: thesis, argument, company analysis, readable references.
+2. Publishing frontend: argument, structure, prose, references.
 
 The backend makes the article reliable. The frontend makes it worth reading.

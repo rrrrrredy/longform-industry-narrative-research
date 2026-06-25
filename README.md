@@ -1,44 +1,47 @@
-# Longform Industry Narrative Research
+# Longform Industry Research and Writing
 
-An agent skill for producing source-backed, publishable longform industry narrative research.
+An agent skill for source-backed longform industry research and publishable Chinese/English writing.
 
-This repository is packaged in a Codex-compatible skill format, but the method is agent-agnostic. It is designed for complex research-and-writing tasks where an AI agent must collect materials, structure evidence, analyze companies or actors, synthesize narrative mechanisms, and then rewrite the result into a clean author-facing article rather than a process report.
+This repository contains a reusable research-writing protocol for AI agents. It is designed for complex tasks where an agent must plan research, collect and classify sources, manage evidence, analyze a market or topic in stages, draft section by section, run review loops, and turn the result into a clean reader-facing article or report.
 
-It was distilled from a long AI industry narrative research project covering company narratives, founder interviews, podcasts, official blogs, media translation, market reports, advertising, pricing, talent flow, and cross-market China-overseas narrative diffusion.
+The method is intentionally general. Narrative analysis is one optional lens, not the default frame. The skill can also support market analysis, company research, product/category studies, policy and regulation research, technology ecosystem analysis, organization/talent studies, and counter-case analysis.
 
 ## What This Skill Helps With
 
-Use this skill when you need to produce substantial industry analysis such as:
+Use this skill when you need to produce substantial research writing such as:
 
-- company-by-company narrative studies
-- AI or technology industry longform essays
-- cross-market narrative analysis
-- podcast and interview synthesis
-- official blog and product narrative analysis
-- media and capital-market narrative mapping
-- counter-narrative and risk analysis
-- final cleanup of a research draft into a publishable article
+- company, product, or market category studies
+- technology ecosystem analysis
+- industry structure and competition reports
+- policy, regulation, and institutional analysis
+- organization, talent, and operating-model research
+- product adoption and user-behavior analysis
+- capital-market, pricing, and business-model analysis
+- cross-region or cross-market comparison
+- synthesis of official materials, data, papers, media, interviews, community discussion, and counter-evidence
+- final cleanup of a research draft into a publishable article or report
 
-The central idea is simple:
+The central idea:
 
 > Keep the research backend rigorous, but keep the final article clean.
 
 The skill separates two layers:
 
-- **Backstage research system**: sources, claims, uncertainty, logs, checkpoints, audits, inaccessible materials.
-- **Frontstage article**: thesis, argument, company analysis, narrative mechanisms, counter-narratives, conclusions, reader-facing references.
+- **Research backend**: task spec, source registry, claim registry, uncertainty list, logs, checkpoints, review records, access failures.
+- **Publishing frontend**: thesis, argument, section structure, analysis, synthesis, implications, reader-facing references.
 
 ## Core Method
 
-For each company, actor, or topic, the skill recommends a five-part analysis card:
+The workflow is:
 
-1. **Narrative history**: how the external story changed over time.
-2. **Current narrative position**: what default language, workflow, or market frame the actor tries to own.
-3. **Construction and diffusion mechanism**: product, API, docs, keynote, blog, podcast, pricing, ads, community, capital reports.
-4. **External behavior change**: how the narrative changes developers, markets, media, capital, practitioners, or society.
-5. **Counter-narrative and boundary**: what could weaken, narrow, or invalidate the story.
-
-The final article should not read like a source-processing log. It should read like an author's argument.
+1. **Frame the task**: define the question, reader, scope, evidence standard, output form, and completion criteria.
+2. **Build the backend**: maintain state files and registries when the task is long or multi-stage.
+3. **Collect and classify sources**: official materials, primary data, expert materials, media, market evidence, community reception, and counter-evidence as relevant.
+4. **Analyze in units**: company, product, market, technology, policy, actor, period, or case.
+5. **Choose optional lenses**: narrative analysis, horizontal-vertical analysis, adoption analysis, capital analysis, organization/talent analysis, policy analysis, or counter-case analysis.
+6. **Draft in sections**: do not generate the whole report in one pass when the project is complex.
+7. **Review and revise**: run evidence, coverage, skeptical, structure, and reader-quality review loops.
+8. **Finalize cleanly**: remove process language and produce reader-facing references.
 
 ## Repository Structure
 
@@ -49,82 +52,68 @@ longform-industry-narrative-research/
 │   └── openai.yaml
 └── references/
     ├── research-workflow.md
+    ├── optional-analysis-lenses.md
+    ├── horizontal-vertical-analysis.md
+    ├── subagents-and-review-loop.md
     ├── writing-style.md
     ├── quality-gates.md
     └── postmortem-lessons.md
 ```
 
-## Installation
+## Installation / Reuse
 
-For Codex, clone this repository into your Codex skills directory. For other agent systems, reuse `SKILL.md` and the `references/` files as the agent's reusable workflow instructions.
-
-### macOS / Linux
+Clone or copy this repository into the directory where your agent system loads reusable skills or instruction bundles.
 
 ```bash
-mkdir -p ~/.codex/skills
 git clone https://github.com/rrrrrredy/longform-industry-narrative-research.git \
-  ~/.codex/skills/longform-industry-narrative-research
+  ./agent-skills/longform-industry-research
 ```
 
-### Windows PowerShell
-
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.codex\skills" | Out-Null
-git clone https://github.com/rrrrrredy/longform-industry-narrative-research.git `
-  "$env:USERPROFILE\.codex\skills\longform-industry-narrative-research"
-```
-
-Restart Codex or start a new Codex thread after installation so the skill can be discovered.
+For systems without a formal skill loader, use `SKILL.md` as the main instruction file and load files under `references/` only when the task requires them.
 
 ## Example Prompts
 
 ```text
-Use $longform-industry-narrative-research to plan a longform essay on how AI coding companies are reshaping developer workflows.
+Use $longform-industry-narrative-research to plan a source-backed report on the enterprise adoption of AI coding tools.
 ```
 
 ```text
-Use $longform-industry-narrative-research to turn these source notes into a publishable company-by-company industry narrative report.
+Use $longform-industry-narrative-research to turn these source notes into a publishable market structure analysis.
 ```
 
 ```text
-Use $longform-industry-narrative-research to review this draft and remove process language, source-log language, and assistant-first phrasing.
+Use $longform-industry-narrative-research to review this draft, remove process language, and make the argument read like a finished research article.
 ```
 
-## Writing Principles
+## Design Principles
 
-The skill pushes an agent to:
-
-- decide the thesis before collecting more material
-- process sources by analytical use, not just by summary
-- draft complex reports section by section
-- integrate podcasts and interviews as narrative translation mechanisms
-- keep counter-narratives inside the analysis
-- avoid visible source IDs in final body text
-- remove phrases like "the user provided", "the material shows", and "supplementary evidence"
-- build a reader-facing reference appendix instead of dumping the full source registry
+- State before scale: define the question and reader before collecting more material.
+- Evidence is not prose: registries belong backstage; the final article should not read like a log.
+- Use methods conditionally: narrative analysis, horizontal-vertical analysis, and capital analysis are optional lenses.
+- Work in stages: plan, collect, analyze, draft, review, revise.
+- Review must close the loop: every audit finding should become a concrete revision action.
+- Reader quality matters: after factual and coverage checks, run a reader-focused revision pass.
 
 ## What This Is Not
 
-This is not a citation manager, a scraping tool, or a generic report template.
+This is not:
 
-It is a writing and research workflow skill for long, judgment-heavy industry analysis where both evidence discipline and final prose quality matter.
+- a scraping tool
+- a citation manager
+- a generic report template
+- a replacement for source verification
+- a one-click article generator
+- a narrative-analysis-only framework
 
-## Chinese Version / 中文说明
+It is a reusable workflow for long, judgment-heavy research writing where evidence discipline and final prose quality both matter.
 
-# 长篇产业叙事研究 Skill
+---
 
-这是一个适用于 AI agent 的研究写作 skill，适合处理资料量大、周期长、需要形成可发布文章的产业研究任务。当前仓库采用 Codex-compatible skill 格式打包，但方法本身不是 Codex 专用。
+# 长篇产业研究与写作 Skill
 
-它的核心目标不是生成一份过程报告，而是帮助 agent 完成：
+这是一个适用于 AI agent 的通用研究写作 skill，用于资料量大、周期长、需要形成可发布中文或英文文章/报告的产业研究任务。
 
-- 资料收集
-- 来源管理
-- 公司逐个分析
-- 播客和访谈处理
-- 媒体与资本叙事拆解
-- 反叙事分析
-- 最终长文写作
-- 终稿去过程化改写
+它不是某个特定主题的研究框架，也不是只服务于“叙事分析”的方法。叙事分析只是可选分析镜头之一。这个 skill 更核心的目标是：让 agent 在长周期研究中保持任务状态、证据纪律、分段写作、审计闭环和终稿可读性。
 
 一句话概括：
 
@@ -134,85 +123,88 @@ It is a writing and research workflow skill for long, judgment-heavy industry an
 
 这个 skill 适合用于：
 
-- AI 公司外部叙事研究
-- 科技公司成长史和叙事演化分析
-- 中外产业叙事比较
-- 播客、访谈、公众号和媒体材料综合分析
-- 公司官网、官方 blog、技术报告和产品发布拆解
-- 资本报告、市场报告和广告传播分析
-- 长篇行业文章的结构化写作
-- 把研究草稿改成可发布文章
+- 公司、产品或市场类别研究
+- 技术生态与产业链分析
+- 行业结构与竞争格局研究
+- 政策、监管与制度分析
+- 组织、人才流动与运营模式研究
+- 产品采用与用户行为分析
+- 商业模式、定价、融资与资本市场分析
+- 跨区域、跨市场、跨公司比较研究
+- 官方材料、数据、论文、媒体、访谈、社区讨论和反面案例的综合分析
+- 把研究草稿改成可发布文章或报告
 
-## 核心方法
+## 核心流程
 
-每家公司或研究对象都建议按五个部分处理：
+1. **定义任务**：明确研究问题、目标读者、覆盖范围、证据标准、输出形式和完成标准。
+2. **建立后台**：对长任务维护状态文件、来源台账、判断台账和不确定性清单。
+3. **收集并分类资料**：根据题目选择官方材料、原始数据、专家材料、媒体报道、市场证据、社区反馈和反面证据。
+4. **按分析单元处理**：可以按公司、产品、市场、技术、政策、人物、阶段或案例拆解。
+5. **选择分析镜头**：按需使用叙事分析、横纵分析、采用分析、资本分析、组织/人才分析、政策分析或反面案例分析。
+6. **分段写作**：复杂任务不要一次性生成全文，而是按章节、公司、主题或观点逐步写。
+7. **审计与修订**：执行事实、覆盖、反方、结构和读者体验 review，并把反馈转成具体修改动作。
+8. **终稿清理**：删除过程语言、内部 source id、审计痕迹和 assistant 第一视角，形成读者可读的文章。
 
-1. **叙事成长史**：公司对外叙事如何随时间变化。
-2. **当前叙事定位**：公司试图占据什么默认语言、入口、工作流或市场框架。
-3. **叙事构建与扩散机制**：产品、API、文档、发布会、博客、播客、广告、定价、社区和资本报告。
-4. **外部行为变化**：如何影响市场、开发者、媒体、资本、从业者和社会认知。
-5. **反叙事和边界**：哪些因素可能削弱或限制这套叙事。
+## 推荐文件结构
 
-最终文章不应该像资料处理日志，而应该像作者自己的研究判断。
-
-## 关键写作原则
-
-使用这个 skill 时，agent 会被引导去：
-
-- 先确定文章主线，再继续搜集资料
-- 把来源台账和正文写作分开
-- 一家公司一家公司写，不一次性糊完整篇
-- 把播客和访谈当成叙事转译机制，而不是简单摘要
-- 把反叙事写进正文，而不是只写公司想让外界相信的故事
-- 终稿中不显示 `[Sxxx]` 这类来源编号
-- 删除“用户提供材料”“材料显示”“补充材料”“证据缺口”等过程语言
-- 文末参考资料按读者可理解的类别整理，而不是直接贴完整审计台账
-
-## 安装方式
-
-### Windows PowerShell
-
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.codex\skills" | Out-Null
-git clone https://github.com/rrrrrredy/longform-industry-narrative-research.git `
-  "$env:USERPROFILE\.codex\skills\longform-industry-narrative-research"
+```text
+longform-industry-narrative-research/
+├── SKILL.md
+├── agents/
+│   └── openai.yaml
+└── references/
+    ├── research-workflow.md
+    ├── optional-analysis-lenses.md
+    ├── horizontal-vertical-analysis.md
+    ├── subagents-and-review-loop.md
+    ├── writing-style.md
+    ├── quality-gates.md
+    └── postmortem-lessons.md
 ```
 
-### macOS / Linux
+## 安装 / 复用
+
+将本仓库 clone 或复制到你的 agent 系统用于加载 skill / instruction bundle 的目录中：
 
 ```bash
-mkdir -p ~/.codex/skills
 git clone https://github.com/rrrrrredy/longform-industry-narrative-research.git \
-  ~/.codex/skills/longform-industry-narrative-research
+  ./agent-skills/longform-industry-research
 ```
 
-使用 Codex 时，安装后重启 Codex，或开启一个新的 Codex 线程。其他 agent 系统可直接复用 `SKILL.md` 和 `references/` 中的方法说明。
+如果你的 agent 系统没有正式的 skill loader，可以把 `SKILL.md` 作为主说明文件，把 `references/` 下的文件作为按需加载的参考材料。
 
 ## 示例提示词
 
 ```text
-Use $longform-industry-narrative-research to plan and write a longform Chinese article about AI company narrative competition.
+Use $longform-industry-narrative-research to plan a source-backed report on the enterprise adoption of AI coding tools.
 ```
 
 ```text
-Use $longform-industry-narrative-research to turn these notes into a publishable industry narrative essay.
+Use $longform-industry-narrative-research to turn these notes into a publishable market structure analysis.
 ```
 
 ```text
-Use $longform-industry-narrative-research to clean this draft and remove process-language, audit-language, and assistant-first phrasing.
+Use $longform-industry-narrative-research to clean this draft, remove process language, and make it read like a finished research article.
 ```
 
-## 设计理念
+## 设计原则
 
-复杂产业研究不能只靠一次性生成。更可靠的方式是：
+- 先定问题和读者，再扩大资料规模。
+- 证据台账不是正文；终稿不能像工作日志。
+- 方法按需选择；叙事分析、横纵分析、资本分析都只是可选镜头。
+- 长任务必须分阶段推进：规划、收集、分析、写作、审计、修订。
+- 审计必须闭环；每个问题都要落到具体修改动作。
+- 读者体验是终稿质量的一部分；事实与覆盖审计之后，还要做读者视角修订。
 
-1. 先确定主线。
-2. 再建立来源和判断台账。
-3. 按公司或主题逐块处理。
-4. 合稿时围绕主线重组。
-5. 最后做一次专门的“去过程化改写”。
+## 它不是什么
 
-这个 skill 的重点，就是帮助 agent 同时做到两件事：
+这个 skill 不是：
 
-- 后台证据可追溯；
-- 前台文章可阅读、可发布。
+- 抓取工具
+- 引文管理器
+- 通用报告模板
+- 来源核查的替代品
+- 一键生成文章的工具
+- 只适用于叙事研究的方法
+
+它是一套服务于长篇、复杂、重判断研究写作的通用 agent 工作流。
