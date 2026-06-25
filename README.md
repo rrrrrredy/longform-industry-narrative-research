@@ -8,6 +8,8 @@ Task State Source Registry Claim Discipline Staged Drafting Review Loop Reader R
 
 [Open protocol page](https://rrrrrredy.github.io/longform-industry-narrative-research/framework.html#fullmd)
 
+The protocol page is the structured reading guide. `SKILL.md` is the authoritative agent instruction file. Files under `references/` are optional modules loaded only when the task needs that method, review loop, or writing guidance.
+
 ## 01 Motivation: Four Failure Modes
 
 Longform research agents tend to fail in four recurring ways:
@@ -186,6 +188,8 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 这是一个面向 AI agent 的长篇产业研究与写作协议，用于处理资料量大、周期长、需要形成可发布文章或研究报告的任务。
 
 它不是抓取工具、数据源、固定报告模板，也不是只服务于“叙事研究”的方法。它的作用是规定一套可复用的研究执行约束：agent 如何保存任务状态、如何区分来源与判断、如何分阶段写作、如何进行审计与读者视角修订，以及如何把复杂的后台研究整理成干净的前台文章。
+
+协议页面是给读者看的结构化导览，`SKILL.md` 是 agent 实际使用的权威指令文件，`references/` 下的文件是按需加载的扩展模块。只有任务需要某个方法、审计循环或写作规则时，才读取对应 reference。
 
 ## 01 动机：四类常见失败
 
