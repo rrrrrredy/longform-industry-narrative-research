@@ -213,6 +213,7 @@ The authoritative instruction file is [`SKILL.md`](./SKILL.md). The framework pa
 
 ```text
 industry-research-framework/
+├── LICENSE
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
@@ -239,6 +240,10 @@ git clone https://github.com/rrrrrredy/industry-research-framework.git \
 ```
 
 For systems without a formal skill loader, use `SKILL.md` as the main instruction file and load files under `references/` only when the task requires them.
+
+## License
+
+This project is open source under the [MIT License](./LICENSE).
 
 ---
 
@@ -380,5 +385,9 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 仓库源码在这里：
 
 [rrrrrredy/industry-research-framework](https://github.com/rrrrrredy/industry-research-framework)
+
+## 09 许可协议
+
+本项目采用 [MIT License](./LICENSE) 开源。
 
 
