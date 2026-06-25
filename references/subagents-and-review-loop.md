@@ -95,7 +95,7 @@ The Reader Critic scores:
 
 - Reading Flow
 - Cognitive Load
-- Narrative/Argument Continuity
+- Argument Continuity
 - Research Report Quality
 
 Allowed revisions:

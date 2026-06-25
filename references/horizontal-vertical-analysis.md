@@ -72,7 +72,7 @@ Answer:
 ## Writing Guidance
 
 - Prioritize readability over a mechanical consulting report.
-- Use narrative in the vertical section, but keep facts traceable.
+- Use chronological explanation in the vertical section, but keep facts traceable.
 - Use comparison in the horizontal section, but keep it explanatory rather than tabular.
 - Make judgments, but mark speculation clearly.
 - Avoid empty terms such as "empower", "closed loop", or "strategic foothold" unless they are being critically analyzed.

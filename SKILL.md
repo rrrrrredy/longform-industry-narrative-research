@@ -13,7 +13,7 @@ Longform research agents tend to fail in five recurring ways:
 
 1. Topic overfitting: a method distilled from one project becomes falsely treated as the universal frame.
 2. Process leakage: the final article reads like a work log, with phrases such as "the user provided" or "the material shows".
-3. Evidence drift: sources, claims, uncertainty, and author judgment collapse into one undifferentiated narrative.
+3. Evidence drift: sources, claims, uncertainty, and author judgment collapse into one undifferentiated argument.
 4. False completion: a partial milestone is reported as final completion before coverage, review, and reader-quality revision are done.
 5. Depth collapse: a report satisfies source counts and coverage checklists but is too short, compressed, or thin for the user's expected research depth.
 
@@ -27,7 +27,7 @@ Every mechanism in this framework targets one of those failures.
 4. Depth budget before drafting: record expected depth, rough length band, unit-level expansion plan, and what "too short" would mean for this task.
 5. Staged execution: plan, collect, analyze, draft, review, revise, and update state before moving to the next unit.
 6. Section-level progress: write complex work by section, company, case, period, or argument; do not generate the whole report in one pass.
-7. Optional lenses only: narrative analysis, horizontal-vertical analysis, capital analysis, and adoption analysis are tools, not default structure.
+7. Optional lenses only: framing/category analysis, horizontal-vertical analysis, capital analysis, and adoption analysis are tools, not default structure.
 8. Review closes the loop: every audit finding must become a revision action, a downgraded claim, or an explicit limitation.
 9. Reader review comes last: improve readability only after factual, coverage, structure, and depth checks are stable.
 
@@ -108,7 +108,7 @@ Every important hard claim should have a confidence boundary. Do not turn compan
 
 Choose the lens that fits the research question:
 
-- narrative analysis: framing, legitimacy, category creation, public meaning, media translation
+- framing/category analysis: positioning, legitimacy, category creation, public meaning, and media translation
 - horizontal-vertical analysis: timeline depth plus current competitor/substitute comparison
 - adoption analysis: user behavior, workflow change, replacement, friction
 - capital analysis: pricing, revenue, valuation, funding, cost structure, margins

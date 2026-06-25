@@ -16,7 +16,7 @@ Longform research agents tend to fail in five recurring ways:
 
 1. **Topic overfitting**: a method distilled from one project becomes falsely treated as the universal frame.
 2. **Process leakage**: the final article reads like a work log.
-3. **Evidence drift**: sources, claims, uncertainty, and author judgment collapse into one narrative.
+3. **Evidence drift**: sources, claims, uncertainty, and author judgment collapse into one argument.
 4. **False completion**: a partial milestone is reported as final completion before coverage, review, and reader-quality revision are done.
 5. **Depth collapse**: source counts and coverage checklists pass, but the finished report is too short or compressed for the expected research depth.
 
@@ -31,7 +31,7 @@ Hard rules of the framework:
 - Evidence is not prose: registries and audit labels stay backstage.
 - Depth budget before drafting: define expected depth, rough length band, unit-level expansion plan, and what would count as too short.
 - Staged execution: plan, collect, analyze, draft, review, revise, then continue.
-- Optional lenses only: narrative analysis and horizontal-vertical analysis are tools, not default structure.
+- Optional lenses only: framing/category analysis and horizontal-vertical analysis are tools, not default structure.
 - Review closes the loop: every audit finding becomes a revision action, downgraded claim, or explicit limitation.
 - Reader review comes last: improve readability after factual, coverage, structure, and depth checks are stable.
 
@@ -99,7 +99,7 @@ For longform deliverables, source counts, claim counts, link counts, and file si
 
 Choose the lens that fits the research question:
 
-- narrative analysis
+- framing/category analysis
 - horizontal-vertical analysis
 - adoption analysis
 - capital analysis
@@ -192,7 +192,7 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 
 这是一个面向 AI agent 的长篇产业研究与写作框架，用于处理资料量大、周期长、需要形成可发布文章或研究报告的任务。
 
-它不是抓取工具、数据源、固定报告模板，也不是只服务于“叙事研究”的方法。它提供的是一套可复用的研究执行框架：帮助 agent 保存任务状态、区分来源与判断、分阶段推进写作、完成审阅与读者视角修订，并把复杂的后台研究整理成干净的成稿。
+它不是抓取工具、数据源或固定报告模板。它提供的是一套可复用的研究执行框架：帮助 agent 保存任务状态、区分来源与判断、分阶段推进写作、完成审阅与读者视角修订，并把复杂的后台研究整理成干净的成稿。
 
 框架页面是给读者看的结构化导览，`SKILL.md` 是 agent 实际使用的权威指令文件，`references/` 下的文件是按需加载的扩展模块。只有任务需要某个方法、审阅循环或写作规则时，才读取对应 reference。
 
@@ -215,7 +215,7 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 - **证据不是正文**：来源台账、审阅记录、访问失败、内部来源编号留在后台，不能直接污染终稿。
 - **先定深度，再写终稿**：在写作前明确预期篇幅、章节展开计划、重点单元的深度要求，以及什么情况属于“太短”。
 - **分阶段推进**：规划、收集、分析、写作、审阅、修订、更新状态，按阶段循环。
-- **方法按需选择**：叙事分析、横纵分析、资本分析、采用分析都是可选镜头，不是默认结构。
+- **方法按需选择**：框架与类别分析、横纵分析、资本分析、采用分析都是可选镜头，不是默认结构。
 - **审阅必须闭环**：每个审阅问题都要变成具体修改动作、降级后的判断，或明确的不确定性说明。
 - **读者视角最后介入**：先完成事实、覆盖、结构和深度检查，再做可读性、节奏和理解负担优化。
 

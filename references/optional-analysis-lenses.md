@@ -13,19 +13,19 @@ Ask:
 - What kind of claim is the report making?
 - Which lens would change the answer, not merely add decoration?
 
-## Narrative Analysis
+## Framing And Category Analysis
 
-Use when the topic involves framing, legitimacy, category creation, belief formation, media translation, strategic communication, or public meaning.
+Use when the topic involves positioning, legitimacy, category creation, belief formation, media translation, strategic communication, or public meaning.
 
 Core questions:
 
 - Who is trying to define the category?
 - What language, metaphor, metric, or storyline do they promote?
 - Through what channels does it spread?
-- Whose behavior changes because of the framing?
+- Whose behavior changes because of the positioning or category definition?
 - What counter-story challenges it?
 
-Do not use narrative analysis as a default synonym for all industry research.
+Do not use framing/category analysis as a default synonym for all industry research.
 
 ## Horizontal-Vertical Analysis
 
