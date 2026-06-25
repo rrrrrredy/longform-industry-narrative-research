@@ -179,7 +179,7 @@
 
       .tagbar {
         display: grid;
-        grid-template-columns: repeat(8, minmax(0, 1fr));
+        grid-template-columns: repeat(9, minmax(0, 1fr));
         border: 1px solid var(--line-strong);
         border-top: 0;
         background: var(--dark);
@@ -627,6 +627,7 @@
         <span>Scope Contract</span>
         <span>Research Brief</span>
         <span>Task State</span>
+        <span>Recovery</span>
         <span>Source Registry</span>
         <span>Claim Discipline</span>
         <span>Staged Drafting</span>
@@ -642,13 +643,14 @@
           <a href="#constraints">03 Constraints</a>
           <a href="#architecture">04 Architecture</a>
           <a href="#state">05 State Files</a>
-          <a href="#brief">06 Research Brief</a>
-          <a href="#loop">07 Operating Loop</a>
-          <a href="#lenses">08 Analysis Lenses</a>
-          <a href="#subagents">09 Subagents</a>
-          <a href="#engineering">10 Engineering</a>
-          <a href="#validation">11 Validation</a>
-          <a href="#fullmd">12 Full SKILL.md</a>
+          <a href="#recovery">06 Recovery</a>
+          <a href="#brief">07 Research Brief</a>
+          <a href="#loop">08 Operating Loop</a>
+          <a href="#lenses">09 Analysis Lenses</a>
+          <a href="#subagents">10 Subagents</a>
+          <a href="#engineering">11 Engineering</a>
+          <a href="#validation">12 Validation</a>
+          <a href="#fullmd">13 Full SKILL.md</a>
         </aside>
 
         <div class="content">
@@ -798,9 +800,36 @@
             </div>
           </section>
 
-          <section id="brief" class="section">
+          <section id="recovery" class="section">
             <div class="section-head">
               <div class="index">06</div>
+              <div>
+                <h2>Recovery And Guardrails</h2>
+                <p class="section-kicker">Recover from context loss through state files, and stop loops before they become false progress.</p>
+              </div>
+            </div>
+            <div class="cards">
+              <article class="card">
+                <div class="card-number">Recovery</div>
+                <h3>Resume from state</h3>
+                <p>Read task_spec, progress, recent findings, iteration logs, and tried directions before taking action after a restart.</p>
+              </article>
+              <article class="card dark">
+                <div class="card-number">Guardrail</div>
+                <h3>Stop empty collection</h3>
+                <p>If three consecutive source passes add no relevant evidence, stop that direction and draft or pivot.</p>
+              </article>
+              <article class="card">
+                <div class="card-number">Guardrail</div>
+                <h3>Extract claims</h3>
+                <p>If sources grow while claims stay thin, pause collection and convert evidence into claims before searching more.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="brief" class="section">
+            <div class="section-head">
+              <div class="index">07</div>
               <div>
                 <h2>Research Brief Gate</h2>
                 <p class="section-kicker">Before collecting sources, ask only for missing information that changes scope, output, evidence, or depth.</p>
@@ -814,7 +843,7 @@
 
           <section id="loop" class="section">
             <div class="section-head">
-              <div class="index">07</div>
+              <div class="index">08</div>
               <div>
                 <h2>Operating Loop</h2>
                 <p class="section-kicker">Each stage produces bounded progress, then updates state before the next stage begins.</p>
@@ -840,7 +869,7 @@
 
           <section id="lenses" class="section">
             <div class="section-head">
-              <div class="index">08</div>
+              <div class="index">09</div>
               <div>
                 <h2>Analysis Lens Scheduling</h2>
                 <p class="section-kicker">Pick one primary lens and at most two secondary lenses unless the user explicitly requests a multi-method report.</p>
@@ -858,7 +887,7 @@
 
           <section id="subagents" class="section">
             <div class="section-head">
-              <div class="index">09</div>
+              <div class="index">10</div>
               <div>
                 <h2>Subagent Scheduling Patterns</h2>
                 <p class="section-kicker">Subagents inspect or challenge bounded work. They do not own the thesis or rewrite the whole report.</p>
@@ -878,7 +907,7 @@
 
           <section id="engineering" class="section">
             <div class="section-head">
-              <div class="index">10</div>
+              <div class="index">11</div>
               <div>
                 <h2>Engineering Constraints</h2>
                 <p class="section-kicker">The framework turns quality checks into mechanical habits instead of end-of-project reconstruction.</p>
@@ -897,7 +926,7 @@
 
           <section id="validation" class="section">
             <div class="section-head">
-              <div class="index">11</div>
+              <div class="index">12</div>
               <div>
                 <h2>Validation And Limits</h2>
                 <p class="section-kicker">The framework improves reliability, but it does not make an agent immune to bad sources, weak reasoning, or unsupported claims.</p>
@@ -907,7 +936,7 @@
               <article class="card">
                 <div class="card-number">Completion Gate</div>
                 <h3>Before final delivery</h3>
-                <p>The research brief gate is complete or assumptions are recorded; required coverage is complete or explicitly bounded; major claims trace back to sources; counter-evidence and depth expectations have been addressed.</p>
+                <p>The research brief gate is complete or assumptions are recorded; required coverage is complete or explicitly bounded; major claims trace back to sources; counter-evidence, recovery state, and depth expectations have been addressed.</p>
               </article>
               <article class="card dark">
                 <div class="card-number">Limits</div>
@@ -920,7 +949,7 @@
           <section id="fullmd" class="section">
             <div class="copyrow">
               <div>
-                <div class="index">12</div>
+                <div class="index">13</div>
                 <h2>Full SKILL.md</h2>
                 <p class="section-kicker">The authoritative instruction file, included here for copying into other agent environments.</p>
               </div>
@@ -1014,6 +1043,18 @@ For substantial work, create:
       uncertainty_registry.csv
 
 Use state files to recover after context loss. Do not rely on chat history as the only memory.
+
+### Context Recovery Protocol
+
+When resuming after context loss, session restart, or handoff:
+
+1. Read `state/task_spec.md` for objective, scope, reader, output, depth, evidence standard, and assumptions.
+2. Read `state/progress.json` for current stage, completed units, open issues, stale_count, and next action.
+3. Read the latest entries in `state/findings.jsonl` and `state/iteration_log.jsonl` to recover the recent direction.
+4. Read `state/directions_tried.json` to avoid repeating failed or exhausted paths.
+5. Resume from the matching step in the operating loop.
+
+Do not re-run completed stages. Do not re-ask the research brief if `task_spec.md` already records the answers.
 
 ## 6. Research Brief Gate
 
@@ -1144,6 +1185,17 @@ Limits:
 2. Subagent review is a check, not external truth.
 3. Optional lenses can overfit the report if used mechanically.
 4. State files help recovery, but they only work if updated during the task, not reconstructed after the fact.
+
+## 13. Execution Guardrails
+
+Use these guardrails to prevent loops, overcollection, and scope drift:
+
+1. Source collection: if three consecutive searches or source passes add no relevant evidence, stop collecting in that direction, update `directions_tried.json`, and draft or pivot.
+2. Claim extraction: if `source_registry.csv` grows while `claims_registry.csv` stays thin, pause collection and extract claims before gathering more sources.
+3. Review loop: cap full review-revise cycles at two per section unless the user asks for more; record unresolved issues as limitations or follow-up tasks.
+4. Depth check: before reader review, compare the draft against the depth budget and expand thin units before optimizing prose.
+5. Scope expansion: if new work falls outside `task_spec.md`, record it as a proposed extension and ask before expanding the project.
+6. Subagent review: prompts must ask the reviewer to actively look for issues; if no issue is found, the reviewer must state what evidence supports PASS.
 
 ## References
 

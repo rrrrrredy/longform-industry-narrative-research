@@ -87,6 +87,18 @@ For substantial work, create:
 
 Use state files to recover after context loss. Do not rely on chat history as the only memory.
 
+### Context Recovery Protocol
+
+When resuming after context loss, session restart, or handoff:
+
+1. Read `state/task_spec.md` for objective, scope, reader, output, depth, evidence standard, and assumptions.
+2. Read `state/progress.json` for current stage, completed units, open issues, stale_count, and next action.
+3. Read the latest entries in `state/findings.jsonl` and `state/iteration_log.jsonl` to recover the recent direction.
+4. Read `state/directions_tried.json` to avoid repeating failed or exhausted paths.
+5. Resume from the matching step in the operating loop.
+
+Do not re-run completed stages. Do not re-ask the research brief if `task_spec.md` already records the answers.
+
 ## 6. Research Brief Gate
 
 Before collection, decide whether the request contains enough decision-critical information. If not, ask one compact batch of questions before starting. The batch should usually contain 3-7 questions and must cover expected length or depth when it is missing.
@@ -216,6 +228,17 @@ Limits:
 2. Subagent review is a check, not external truth.
 3. Optional lenses can overfit the report if used mechanically.
 4. State files help recovery, but they only work if updated during the task, not reconstructed after the fact.
+
+## 13. Execution Guardrails
+
+Use these guardrails to prevent loops, overcollection, and scope drift:
+
+1. Source collection: if three consecutive searches or source passes add no relevant evidence, stop collecting in that direction, update `directions_tried.json`, and draft or pivot.
+2. Claim extraction: if `source_registry.csv` grows while `claims_registry.csv` stays thin, pause collection and extract claims before gathering more sources.
+3. Review loop: cap full review-revise cycles at two per section unless the user asks for more; record unresolved issues as limitations or follow-up tasks.
+4. Depth check: before reader review, compare the draft against the depth budget and expand thin units before optimizing prose.
+5. Scope expansion: if new work falls outside `task_spec.md`, record it as a proposed extension and ask before expanding the project.
+6. Subagent review: prompts must ask the reviewer to actively look for issues; if no issue is found, the reviewer must state what evidence supports PASS.
 
 ## References
 

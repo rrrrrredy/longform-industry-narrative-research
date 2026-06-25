@@ -16,6 +16,15 @@ Use these gates before declaring any stage or final deliverable complete.
 - Expected depth, rough length band, and unit-level expansion plan are defined.
 - Initial structure is drafted.
 
+## After Context Loss Or Restart
+
+- `state/task_spec.md` has been read.
+- `state/progress.json` has been read.
+- Recent `findings.jsonl` and `iteration_log.jsonl` entries have been reviewed.
+- `directions_tried.json` has been checked before repeating a direction.
+- Completed stages are not re-run.
+- The research brief is not re-asked if answers already exist in `task_spec.md`.
+
 ## Before Drafting
 
 - Source categories are mapped to the research question.
@@ -23,6 +32,8 @@ Use these gates before declaring any stage or final deliverable complete.
 - Access failures are recorded.
 - Claims are separated from sources.
 - Uncertainty is explicit.
+- If source collection has produced no new relevant evidence for three consecutive passes, the direction is stopped or pivoted.
+- If `source_registry.csv` is growing while `claims_registry.csv` stays thin, claim extraction happens before further collection.
 - Analysis units are defined.
 - The draft thesis is written in one sentence.
 - The depth budget identifies which units need extended analysis and which can be brief.
@@ -70,6 +81,8 @@ Assess:
 Reader review may revise ordering, transitions, paragraph density, titles, and wording. It must not invent facts or silently change evidence boundaries.
 
 If reader review finds serious issues, revise and repeat. Cap reader-review cycles at three unless the user asks for more.
+
+Full review-revise cycles for a single section are capped at two unless the user asks for more; unresolved issues become limitations or follow-up actions.
 
 ## Before Public Delivery
 

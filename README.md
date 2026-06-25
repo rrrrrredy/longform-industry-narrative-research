@@ -4,7 +4,7 @@ A framework for longform, source-backed industry research and publishable writin
 
 It ships no scraper, data source, or fixed report template. Instead, it prescribes conventions for how an agent persists state, separates evidence from prose, avoids topic drift, schedules review, and turns a large research backend into a clean reader-facing article or report.
 
-Scope Contract Research Brief Task State Source Registry Claim Discipline Staged Drafting Review Loop Reader Revision
+Scope Contract Research Brief Task State Recovery Guardrails Source Registry Claim Discipline Staged Drafting Review Loop Reader Revision
 
 [Open framework page](https://rrrrrredy.github.io/industry-research-framework/framework.html#fullmd)
 
@@ -101,6 +101,14 @@ Subagents may inspect or challenge bounded parts of the backend, but the main ag
 
 Use state files to recover after context loss. Do not rely on chat history as the only memory.
 
+Recovery protocol:
+
+1. Read `state/task_spec.md` for objective, scope, reader, output, depth, evidence standard, and assumptions.
+2. Read `state/progress.json` for current stage, completed units, open issues, stale_count, and next action.
+3. Read the latest entries in `state/findings.jsonl` and `state/iteration_log.jsonl` for recent direction.
+4. Read `state/directions_tried.json` to avoid repeated paths.
+5. Resume from the matching step in the operating loop. Do not re-run completed stages or re-ask an answered research brief.
+
 ## 06 Research Brief Gate
 
 Before collecting sources, decide whether the request contains enough decision-critical information. If not, ask one compact batch of questions before starting. The batch should usually contain 3-7 questions and must include expected length or depth when it is missing.
@@ -188,7 +196,16 @@ Limits:
 - Optional lenses can overfit the report if used mechanically.
 - State files only work if updated during the task, not reconstructed after the fact.
 
-## 12 Full SKILL.md
+## 12 Execution Guardrails
+
+- If three consecutive searches or source passes add no relevant evidence, stop that direction and draft or pivot.
+- If `source_registry.csv` grows while `claims_registry.csv` stays thin, pause collection and extract claims.
+- Cap full review-revise cycles at two per section unless the user asks for more.
+- Before reader review, compare the draft against the depth budget and expand thin units.
+- If new work falls outside `task_spec.md`, record it as a proposed extension and ask before expanding.
+- Subagent prompts must ask reviewers to actively look for issues; if no issue is found, they must explain the basis for PASS.
+
+## 13 Full SKILL.md
 
 The authoritative instruction file is [`SKILL.md`](./SKILL.md). The framework page includes the full skill text in a copyable block.
 
@@ -318,7 +335,20 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 
 后台保证可追溯，成稿保证可阅读。两者必须分开。
 
-## 06 适用场景
+## 06 断点恢复与执行护栏
+
+断点恢复时，先读 `state/task_spec.md`，再读 `state/progress.json`，再读 `state/findings.jsonl` 和 `state/iteration_log.jsonl` 的最新记录，最后读 `state/directions_tried.json`。不要重复已完成阶段；如果 `task_spec.md` 已经记录研究范围，不要重新做研究范围校准。
+
+执行中遵守这些护栏：
+
+- 连续三次搜索或资料处理没有新增有效证据时，停止当前方向，记录后转向或进入写作。
+- 来源台账持续增长但判断台账很薄时，暂停收集，先做判断提取。
+- 每个章节的完整审阅-修订循环默认最多两轮，剩余问题写成限制或后续任务。
+- 读者审阅前必须对照深度预算，先补薄弱单元，再优化表达。
+- 新工作超出 `task_spec.md` 时，先记录为扩展建议，不直接扩大任务。
+- 子 agent 必须主动寻找问题；若判定 PASS，必须说明依据。
+
+## 07 适用场景
 
 适合用于：
 
@@ -341,7 +371,7 @@ For systems without a formal skill loader, use `SKILL.md` as the main instructio
 - 没有资料约束的创意写作
 - 用户真正想要代码、仪表盘或自动化工具的任务
 
-## 07 与框架页面的关系
+## 08 与框架页面的关系
 
 完整框架页面在这里：
 

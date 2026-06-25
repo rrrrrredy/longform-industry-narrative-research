@@ -62,6 +62,33 @@ Use state files to survive context loss. Do not rely on chat history as the only
 
 `directions_tried.json` should prevent repeated digging in the same direction. If one cycle adds no new evidence, case, counterexample, framework, or judgment, increment `stale_count`. If `stale_count >= 2`, pivot the structural angle rather than merely searching harder.
 
+### Context Recovery Protocol
+
+When resuming after context loss, session restart, or handoff:
+
+1. Read `state/task_spec.md`.
+2. Read `state/progress.json`.
+3. Read the latest entries in `state/findings.jsonl` and `state/iteration_log.jsonl`.
+4. Read `state/directions_tried.json`.
+5. Resume from the matching staged execution step.
+
+Do not re-run completed stages. Do not re-ask the research brief if `task_spec.md` already records the answers.
+
+### Minimum Field Conventions
+
+Use these fields unless the task clearly needs a narrower local variant:
+
+- `progress.json`: `stage`, `completed_units`, `open_issues`, `stale_count`, `next_action`, `updated_at`
+- `findings.jsonl`: `timestamp`, `unit`, `finding`, `claim_type`, `evidence_level`, `source_refs`, `intended_section`
+- `directions_tried.json`: `direction`, `reason_tried`, `result`, `status`, `next_decision`
+- `logs/work.jsonl`: `timestamp`, `level`, `decision`, `reason`, `files_changed`, `next_action`
+- `logs/review.jsonl`: `timestamp`, `review_type`, `scope`, `result`, `issues`, `routed_actions`
+- `source_registry.csv`: `source_id`, `title`, `url_or_path`, `source_type`, `publisher_or_author`, `date`, `access_status`, `used_for`, `limitations`
+- `claims_registry.csv`: `claim_id`, `claim`, `claim_type`, `evidence_level`, `supporting_sources`, `counter_evidence`, `uncertainty`, `intended_section`
+- `uncertainty_registry.csv`: `uncertainty_id`, `issue`, `affected_claims`, `reason`, `risk_level`, `handling`
+
+Keep field names stable within a task. Add columns only when they improve recovery or evidence tracing.
+
 ## 4. Source Intake
 
 Classify sources by function:
