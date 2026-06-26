@@ -42,6 +42,17 @@ CLAIM_DISCIPLINE_TERMS = [
     "author judgment",
 ]
 
+GLOBAL_PROCESS_PHRASES = [
+    "source pack",
+    "脱敏 source pack",
+    "脱敏评测",
+    "评测材料",
+    "用于检验研究流程",
+    "baseline eval",
+    "template output",
+    "本次只使用脱敏",
+]
+
 
 def read_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as f:
@@ -109,12 +120,34 @@ def count_registry_sources(source_registry_text: str, source_ids: list[str], sou
     return count
 
 
+def repeated_line_flags(final_text: str) -> list[str]:
+    normalized_counts: dict[str, int] = {}
+    for line in final_text.splitlines():
+        line = re.sub(r"\s+", "", line.strip())
+        if len(line) < 24:
+            continue
+        # Keep the stable tail/prefix pattern instead of treating each cited source line as unique.
+        line = re.sub(r"《[^》]+》", "《SOURCE》", line)
+        line = re.sub(r"[A-Za-z0-9_.-]+", "X", line)
+        normalized_counts[line] = normalized_counts.get(line, 0) + 1
+    return [line for line, count in normalized_counts.items() if count >= 3]
+
+
+def bullet_ratio(final_text: str) -> float:
+    content_lines = [line.strip() for line in final_text.splitlines() if line.strip() and not line.lstrip().startswith("#")]
+    if not content_lines:
+        return 0.0
+    bullet_lines = [line for line in content_lines if line.startswith(("-", "*", "1.", "2.", "3.", "4.", "5."))]
+    return len(bullet_lines) / len(content_lines)
+
+
 def evaluate_case(
     case: dict[str, Any],
     run_dir: Path,
     sources_by_id: dict[str, dict[str, Any]],
 ) -> dict[str, Any]:
     findings: list[str] = []
+    quality_flags: list[str] = []
     score = 0
     max_score = 100
 
@@ -172,6 +205,7 @@ def evaluate_case(
     leaked_source_ids = sorted(set(re.findall(r"\bS\d{3}\b", final_text)))
     if leaked_source_ids:
         findings.append("Internal source ids leaked into final.md: " + ", ".join(leaked_source_ids))
+        quality_flags.append("internal_source_id_leak")
 
     if contains_any(final_text, UNCERTAINTY_TERMS):
         score += 10
@@ -183,12 +217,23 @@ def evaluate_case(
     else:
         findings.append("No clear claim/evidence/judgment discipline language found.")
 
-    banned = case.get("banned_process_phrases", [])
+    banned = case.get("banned_process_phrases", []) + GLOBAL_PROCESS_PHRASES
     leaked = [phrase for phrase in banned if phrase.lower() in final_text.lower()]
     if leaked:
         findings.append("Process language leaked into final.md: " + ", ".join(leaked))
+        quality_flags.append("process_language")
     elif not leaked_source_ids:
         score += 10
+
+    repeated = repeated_line_flags(final_text)
+    if repeated:
+        findings.append("Repeated template-like lines found; output may be list-like rather than synthesized.")
+        quality_flags.append("repetition")
+
+    bullets = bullet_ratio(final_text)
+    if bullets > 0.45:
+        findings.append(f"High bullet-line ratio ({bullets:.0%}); inspect for source listing instead of synthesis.")
+        quality_flags.append("list_like")
 
     char_count = len(re.sub(r"\s+", "", final_text))
     if char_count >= 1800:
@@ -199,7 +244,13 @@ def evaluate_case(
     else:
         findings.append(f"Output is too short for this case: {char_count} non-space chars.")
 
-    status = "pass" if score >= 80 and not leaked else "review"
+    quality_penalty = min(30, 10 * len(set(quality_flags)))
+    if quality_penalty:
+        score -= quality_penalty
+        findings.append(f"Quality flag penalty applied: -{quality_penalty}.")
+
+    score = min(score, max_score)
+    status = "pass" if score >= 80 and not leaked and not quality_flags else "review"
     if score < 60:
         status = "fail"
 
@@ -215,6 +266,7 @@ def evaluate_case(
         "registry_hits": registry_hits,
         "final_reference_hits": final_reference_hits,
         "char_count": char_count,
+        "quality_flags": quality_flags,
     }
 
 

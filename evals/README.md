@@ -84,6 +84,9 @@ evals/runs/report.json
 - uncertainty, risk, limitation, or counter-evidence is present
 - claim/evidence/judgment language is present
 - banned process phrases do not leak into `final.md`
+- internal source ids do not leak into `final.md`
+- obvious eval/process language does not leak into `final.md`
+- repeated template-like lines and high bullet-line ratios are flagged for review
 - output is not obviously too short
 
 These checks are intentionally mechanical. They catch regressions; they do not replace editorial judgment.
