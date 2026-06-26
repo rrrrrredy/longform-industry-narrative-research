@@ -590,6 +590,8 @@
         <nav>
           <a href="https://github.com/rrrrrredy/industry-research-framework">Repository</a>
           <a href="#fullmd">Full SKILL.md</a>
+          <a href="#use-agent">Use With Agent</a>
+          <a href="#evaluation-loop">Evaluation Loop</a>
           <a href="#state">State Files</a>
         </nav>
         <div>Open Framework Spec / June 2026</div>
@@ -603,6 +605,7 @@
             <p class="lede">A framework for source-backed longform industry research and publishable writing by AI agents. It defines how agents preserve state, discipline evidence, draft in stages, run review loops, and clean final prose.</p>
             <div class="hero-actions">
               <a class="button" href="#fullmd">Jump to full SKILL.md</a>
+              <a class="button secondary" href="#use-agent">Use with your agent</a>
               <a class="button secondary" href="https://github.com/rrrrrredy/industry-research-framework">View repository</a>
             </div>
           </div>
@@ -643,6 +646,8 @@
         <aside class="toc" aria-label="Page navigation">
           <div class="toc-title">Framework Map</div>
           <a href="#quickstart">00 Quickstart</a>
+          <a href="#use-agent">Use With Agent</a>
+          <a href="#evaluation-loop">Evaluation Loop</a>
           <a href="#motivation">01 Motivation</a>
           <a href="#scope">02 Scope Contract</a>
           <a href="#constraints">03 Constraints</a>
@@ -670,6 +675,50 @@
             <div class="wide">
               <p>Use <code>SKILL.md</code> first. Run research scope calibration, confirm output, reader, depth, evidence standard, and coverage, then create state, logs, and data files before broad source collection.</p>
               <p>Load references conditionally: workflow for setup or recovery, analysis lenses for method choice, subagent guidance before delegation, writing style before drafting, and quality gates before completion.</p>
+            </div>
+          </section>
+
+          <section id="use-agent" class="section">
+            <div class="section-head">
+              <div class="index">A1</div>
+              <div>
+                <h2>Use With Your Agent</h2>
+                <p class="section-kicker">This repository is meant to be handed to an agent as a lightweight research protocol, not installed as a heavy product.</p>
+              </div>
+            </div>
+            <div class="cards">
+              <article class="card">
+                <div class="card-number">Default path</div>
+                <h3>Give the repository URL to your agent</h3>
+                <p>Ask the agent to read <code>SKILL.md</code> first, run the research brief gate before source collection, and load files under <code>references/</code> only when the current stage needs them.</p>
+              </article>
+              <article class="card dark">
+                <div class="card-number">Adapters</div>
+                <h3>Use the agent-specific notes</h3>
+                <p>Codex, Claude, Gemini CLI, Cursor, and general ChatGPT-style agents have short setup notes in the <a href="https://github.com/rrrrrredy/industry-research-framework/tree/main/agents">agents directory</a>.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="evaluation-loop" class="section">
+            <div class="section-head">
+              <div class="index">A2</div>
+              <div>
+                <h2>Evaluation Loop</h2>
+                <p class="section-kicker">The repository includes a small conformance loop for checking whether agents actually follow the framework.</p>
+              </div>
+            </div>
+            <div class="cards">
+              <article class="card">
+                <div class="card-number">What ships</div>
+                <h3>Cases, source pack, rubric</h3>
+                <p>The <a href="https://github.com/rrrrrredy/industry-research-framework/tree/main/evals">evals directory</a> contains task cases, rubrics, and a sanitized AI knowledge source pack for workflow testing.</p>
+              </article>
+              <article class="card dark">
+                <div class="card-number">Runner</div>
+                <h3>Run offline checks</h3>
+                <p>Use <a href="https://github.com/rrrrrredy/industry-research-framework/blob/main/scripts/run_evals.py">scripts/run_evals.py</a> to create eval skeletons and score output artifacts for state files, claim discipline, quality gates, and reader cleanup.</p>
+              </article>
             </div>
           </section>
 

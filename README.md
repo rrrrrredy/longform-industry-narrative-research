@@ -18,6 +18,90 @@ The framework page is the structured reading guide. `SKILL.md` is the authoritat
 4. Load reference files only when needed: workflow for setup or recovery, analysis lenses for method choice, subagent guidance before delegation, writing style before drafting, and quality gates before completion.
 5. Draft section by section, keep evidence backstage, and run reader review only after coverage and evidence checks are stable.
 
+## Use With Your Agent
+
+This repository is designed to stay lightweight. You do not need a hosted app, crawler, database, or CLI to use it. The default path is: give this repository URL to your agent, ask it to read `SKILL.md`, and let it load files under `references/` only when the task needs them.
+
+```text
+Use https://github.com/rrrrrredy/industry-research-framework as your research protocol.
+Read SKILL.md first. Before collecting sources, run the research brief gate.
+For a substantial task, create state/, logs/, and data/ in the project folder.
+Keep sources, claims, uncertainty, and review notes backstage.
+Draft section by section and run quality gates before final delivery.
+```
+
+Recommended installation modes:
+
+- **Codex / local coding agents**: clone this repository into the agent's skill or instructions directory, then mention `$industry-research-framework` or point the agent at `SKILL.md`.
+- **Claude / Gemini CLI / Cursor**: paste the repository URL into the session and ask the agent to read `SKILL.md` as the controlling instruction. Load `references/` files only on demand.
+- **ChatGPT or any general agent**: attach or paste `SKILL.md`, then give the task brief. If file access is available, provide the whole repository.
+
+Agent-specific notes live in [`agents/`](./agents/):
+
+- [`agents/codex.md`](./agents/codex.md)
+- [`agents/claude.md`](./agents/claude.md)
+- [`agents/gemini-cli.md`](./agents/gemini-cli.md)
+- [`agents/cursor.md`](./agents/cursor.md)
+- [`agents/chatgpt.md`](./agents/chatgpt.md)
+
+## Example Tasks
+
+Use these as realistic smoke tests for the framework:
+
+1. **Industry report**: "Research the 2026 AI agent market for strategy readers. Cover platform players, workflow products, protocol/ecosystem moves, commercialization, adoption barriers, and failure modes. Deliver a 6,000-10,000 word Chinese report."
+2. **Competitive analysis**: "Compare OpenAI, Anthropic, Google, ByteDance, Alibaba, and Tencent in AI agent and coding-agent strategy. Separate product surface, developer ecosystem, model capability, distribution, and monetization."
+3. **Investment memo**: "Write an investment memo on the AI video generation market. Focus on category timing, key companies, technical moat, pricing pressure, GTM, adoption risk, and counter-evidence."
+4. **Monthly observation**: "Produce an AI industry monthly observation for an executive reader. Synthesize model releases, agent infrastructure, product competition, open-source dynamics, China/US differences, and implications."
+5. **Technical route research**: "Research reasoning model competition from DeepSeek R1 to Claude Sonnet-style hybrid reasoning. Explain technical paths, product consequences, and what remains uncertain."
+
+## Good vs Bad Output
+
+Good output:
+
+- Opens with a thesis or executive judgment, not a work log.
+- Defines scope, reader, evidence standard, and depth before large-scale collection.
+- Separates verified facts, source claims, interpretation, author judgment, and speculation.
+- Uses sources to support claims and states what each source can and cannot prove.
+- Handles counter-evidence, uncertainty, adoption friction, and alternative explanations.
+- Writes section by section and removes internal source IDs, audit labels, and process language before final delivery.
+
+Bad output:
+
+- Starts writing immediately without confirming scope, audience, depth, or evidence standard.
+- Treats company PR, media summaries, and community comments as equal evidence.
+- Lists sources or companies without explaining mechanisms, causality, or implications.
+- Leaves phrases such as "the user provided", "the material shows", or "this source supplements" in the final article.
+- Declares completion after collecting many links or drafting one section.
+- Produces a short, compressed report while claiming the source registry proves depth.
+
+## Conformance Checklist
+
+Use this lightweight checklist to see whether an agent followed the protocol:
+
+- [ ] **Brief gate**: the agent confirmed or recorded objective, reader, output format, scope, evidence standard, and expected depth.
+- [ ] **State files**: substantial work created or updated `state/task_spec.md`, `state/progress.json`, and recovery notes.
+- [ ] **Claim registry**: important facts, claims, judgments, and uncertainties were tracked separately from source notes.
+- [ ] **Quality gate**: evidence, coverage, structure, counter-evidence, and depth were reviewed before final assembly.
+- [ ] **Reader cleanup**: the final prose removed process language, internal IDs, audit labels, and unsupported claims.
+
+## Evaluation Suite
+
+This repository includes a lightweight evaluation loop under [`evals/`](./evals/). It is intentionally simple: cases, sanitized source packs, rubrics, and an offline runner that checks required artifacts and report quality signals.
+
+```bash
+python scripts/run_evals.py --runs-dir evals/runs --report evals/runs/report.md
+```
+
+To rebuild the sanitized AI knowledge source pack from local knowledge repositories:
+
+```bash
+python scripts/build_sanitized_eval_set.py ^
+  --aiknowledge-cli D:\path\to\aiknowledge-cli ^
+  --knowledge-graph D:\path\to\ai-knowledge-graph
+```
+
+See [`evals/README.md`](./evals/README.md) for the full loop.
+
 ## 01 Motivation: Five Failure Modes
 
 Longform research agents tend to fail in five recurring ways:
@@ -224,10 +308,24 @@ industry-research-framework/
 ├── LICENSE
 ├── SKILL.md
 ├── agents/
-│   └── openai.yaml
+│   ├── README.md
+│   ├── openai.yaml
+│   ├── codex.md
+│   ├── claude.md
+│   ├── gemini-cli.md
+│   ├── cursor.md
+│   └── chatgpt.md
 ├── docs/
 │   ├── index.html
 │   └── framework.html
+├── evals/
+│   ├── README.md
+│   ├── cases/
+│   ├── rubrics/
+│   └── source_packs/
+├── scripts/
+│   ├── build_sanitized_eval_set.py
+│   └── run_evals.py
 └── references/
     ├── research-workflow.md
     ├── optional-analysis-lenses.md
@@ -270,6 +368,90 @@ This project is open source under the [MIT License](./LICENSE).
 3. 对资料量大的任务，先创建 `state/`、`logs/` 和 `data/`，再大规模收集资料。
 4. reference 文件只在需要时读取：启动或恢复任务读 workflow，选择分析方法读 analysis lenses，派发子 agent 前读 subagent guidance，进入写作前读 writing style，阶段验收前读 quality gates。
 5. 一段一段写，证据留在后台，覆盖和证据检查稳定后再做读者审阅。
+
+## 给 Agent 使用
+
+这个仓库刻意保持轻量。默认用法不是安装一个新产品，也不是启动爬虫或数据库，而是：把仓库链接交给你正在使用的 agent，让它先读 `SKILL.md`，只在任务需要时再读取 `references/` 下的扩展文件。
+
+```text
+请使用 https://github.com/rrrrrredy/industry-research-framework 作为本次研究协议。
+先读取 SKILL.md。收集资料前，先完成研究范围校准。
+如果任务较大，在项目目录里创建 state/、logs/、data/。
+来源、判断、不确定性和审阅记录留在后台。
+按章节推进写作，并在最终交付前运行质量门禁。
+```
+
+推荐使用方式：
+
+- **Codex / 本地 coding agent**：把本仓库克隆到 agent 的 skill 或 instruction 目录，再在任务中提到 `$industry-research-framework` 或直接指向 `SKILL.md`。
+- **Claude / Gemini CLI / Cursor**：把仓库链接发给 agent，让它把 `SKILL.md` 当作控制指令；`references/` 文件只在需要对应方法时读取。
+- **ChatGPT 或通用 agent**：上传或粘贴 `SKILL.md`，再给研究任务；如果支持文件访问，直接提供整个仓库。
+
+不同 agent 的适配说明见 [`agents/`](./agents/)：
+
+- [`agents/codex.md`](./agents/codex.md)
+- [`agents/claude.md`](./agents/claude.md)
+- [`agents/gemini-cli.md`](./agents/gemini-cli.md)
+- [`agents/cursor.md`](./agents/cursor.md)
+- [`agents/chatgpt.md`](./agents/chatgpt.md)
+
+## 真实任务示例
+
+这些任务可以作为框架的 smoke test：
+
+1. **行业报告**：研究 2026 年 AI Agent 市场，面向战略读者，覆盖平台型玩家、工作流产品、协议与生态、商业化、采用阻力和失败模式，输出 6000-10000 字中文报告。
+2. **竞品分析**：比较 OpenAI、Anthropic、Google、字节、阿里、腾讯的 AI Agent 与 coding agent 策略，区分产品形态、开发者生态、模型能力、分发和商业化。
+3. **投资 memo**：写一份 AI 视频生成市场投资 memo，重点分析品类时机、关键公司、技术壁垒、价格压力、GTM、采用风险和反证。
+4. **月度观察**：为管理层写 AI 行业月度观察，综合模型发布、Agent 基础设施、产品竞争、开源动态、中美差异和影响判断。
+5. **技术路线研究**：研究从 DeepSeek R1 到 Claude Sonnet 风格混合推理的 reasoning model 竞争，解释技术路径、产品后果和仍不确定的问题。
+
+## 好输出 / 坏输出
+
+好的输出：
+
+- 先给核心判断或执行摘要，而不是工作日志。
+- 大规模收集资料前，明确范围、读者、证据标准和深度。
+- 区分已验证事实、来源说法、解释、作者判断和猜测。
+- 用来源支撑判断，并说明每类来源能证明什么、不能证明什么。
+- 处理反证、不确定性、采用阻力和替代解释。
+- 分章节推进，最终交付前删除内部来源编号、审阅标签和过程语言。
+
+坏的输出：
+
+- 不确认范围、读者、深度和证据标准就直接开写。
+- 把公司 PR、媒体摘要和社区反馈当成同等级证据。
+- 罗列来源或公司，却不解释机制、因果和影响。
+- 终稿里保留“用户提供的资料”“材料显示”“该来源补充了”等过程话术。
+- 收集了很多链接或写完一个章节后就宣布完成。
+- 报告很短、很压缩，却用来源台账完整来替代深度。
+
+## 符合性清单
+
+用这个极轻 checklist 判断 agent 是否真的遵守了框架：
+
+- [ ] **研究范围校准**：agent 已确认或记录目标、读者、输出格式、范围、证据标准和预期深度。
+- [ ] **状态文件**：较大任务已创建或更新 `state/task_spec.md`、`state/progress.json` 和恢复记录。
+- [ ] **判断台账**：重要事实、来源说法、作者判断和不确定性没有混在普通笔记里。
+- [ ] **质量门禁**：最终组装前检查了证据、覆盖、结构、反证和深度。
+- [ ] **读者清理**：终稿删除了过程语言、内部编号、审阅标签和无法支撑的判断。
+
+## 评测集
+
+仓库内置一个轻量评测闭环，见 [`evals/`](./evals/)：包含 cases、脱敏 source pack、rubric 和离线 runner，用于检查 agent 是否真的遵守框架。
+
+```bash
+python scripts/run_evals.py --runs-dir evals/runs --report evals/runs/report.md
+```
+
+如果本地有 AI 知识库仓库，可以重新生成脱敏评测数据：
+
+```bash
+python scripts/build_sanitized_eval_set.py ^
+  --aiknowledge-cli D:\path\to\aiknowledge-cli ^
+  --knowledge-graph D:\path\to\ai-knowledge-graph
+```
+
+完整使用方法见 [`evals/README.md`](./evals/README.md)。
 
 ## 01 动机：五类常见失败
 

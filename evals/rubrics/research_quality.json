@@ -1,0 +1,44 @@
+{
+  "rubric_id": "research_quality_v1",
+  "title": "Industry Research Framework Research Quality Rubric",
+  "scoring_note": "Use this for human review after the offline runner. The automated score catches conformance regressions; this rubric judges whether the work is actually worth reading.",
+  "dimensions": [
+    {
+      "name": "brief_and_scope",
+      "weight": 15,
+      "excellent": "Objective, reader, scope, exclusions, evidence standard, and depth are explicit before collection.",
+      "poor": "The agent starts writing without clarifying or recording what the report is for."
+    },
+    {
+      "name": "evidence_discipline",
+      "weight": 20,
+      "excellent": "Facts, source claims, interpretation, author judgment, and uncertainty remain distinct.",
+      "poor": "PR, media summaries, community comments, and author opinion collapse into one unsupported argument."
+    },
+    {
+      "name": "mechanism_and_synthesis",
+      "weight": 20,
+      "excellent": "The report explains mechanisms, causality, tradeoffs, and implications across sources.",
+      "poor": "The report lists companies or sources without producing a thesis."
+    },
+    {
+      "name": "counter_evidence",
+      "weight": 15,
+      "excellent": "Strong alternative explanations, adoption friction, and failure modes are integrated into the argument.",
+      "poor": "The report only supports its initial thesis and hides uncertainty."
+    },
+    {
+      "name": "depth",
+      "weight": 15,
+      "excellent": "Central units receive enough detail, and thin sections are expanded before reader review.",
+      "poor": "The output is compressed, generic, or shorter than the stated depth budget."
+    },
+    {
+      "name": "reader_quality",
+      "weight": 15,
+      "excellent": "The final prose reads like an authored research article or report.",
+      "poor": "The final prose reads like a process transcript with source IDs, audit labels, or agent workflow language."
+    }
+  ],
+  "pass_guidance": "A serious framework change should not be accepted only because the automated runner passes. At least one human-reviewed output should pass this rubric."
+}
