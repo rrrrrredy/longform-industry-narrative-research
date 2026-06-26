@@ -53,6 +53,14 @@ GLOBAL_PROCESS_PHRASES = [
     "本次只使用脱敏",
 ]
 
+TEMPLATE_SOURCE_LISTING_PHRASES = [
+    "提供的事实或来源说法",
+    "这条证据可支持趋势识别",
+    "不能单独证明长期采用",
+    "提示的约束",
+    "这里应作为风险或边界处理",
+]
+
 
 def read_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as f:
@@ -141,6 +149,10 @@ def bullet_ratio(final_text: str) -> float:
     return len(bullet_lines) / len(content_lines)
 
 
+def repeated_phrase_flags(final_text: str, phrases: list[str], threshold: int = 3) -> list[str]:
+    return [phrase for phrase in phrases if final_text.count(phrase) >= threshold]
+
+
 def evaluate_case(
     case: dict[str, Any],
     run_dir: Path,
@@ -148,12 +160,13 @@ def evaluate_case(
 ) -> dict[str, Any]:
     findings: list[str] = []
     quality_flags: list[str] = []
+    coverage_flags: list[str] = []
     score = 0
     max_score = 100
 
     required_artifacts = case.get("artifact_requirements") or DEFAULT_REQUIRED_ARTIFACTS
     artifact_results = {artifact: (run_dir / artifact).exists() for artifact in required_artifacts}
-    artifact_score = round(25 * sum(artifact_results.values()) / len(artifact_results))
+    artifact_score = round(20 * sum(artifact_results.values()) / len(artifact_results))
     score += artifact_score
     missing_artifacts = [name for name, ok in artifact_results.items() if not ok]
     if missing_artifacts:
@@ -173,23 +186,25 @@ def evaluate_case(
 
     section_hits = [section for section in case.get("required_sections", []) if section in final_text]
     if case.get("required_sections"):
-        section_score = round(15 * len(section_hits) / len(case["required_sections"]))
+        section_score = round(10 * len(section_hits) / len(case["required_sections"]))
     else:
-        section_score = 15
+        section_score = 10
     score += section_score
-    if section_score < 15:
+    if section_score < 10:
         missing = sorted(set(case.get("required_sections", [])) - set(section_hits))
         findings.append("Missing expected sections or headings: " + ", ".join(missing))
+        coverage_flags.append("missing_sections")
 
     entity_hits = [entity for entity in case.get("must_cover_entities", []) if entity.lower() in final_text.lower()]
     if case.get("must_cover_entities"):
-        entity_score = round(15 * len(entity_hits) / len(case["must_cover_entities"]))
+        entity_score = round(10 * len(entity_hits) / len(case["must_cover_entities"]))
     else:
-        entity_score = 15
+        entity_score = 10
     score += entity_score
-    if entity_score < 15:
+    if entity_score < 10:
         missing = sorted(set(case.get("must_cover_entities", [])) - set(entity_hits))
         findings.append("Missing must-cover entities: " + ", ".join(missing))
+        coverage_flags.append("missing_entities")
 
     source_registry_text = read_text(run_dir / "data" / "source_registry.csv")
     final_reference_hits = count_reader_references(final_text, case.get("source_ids", []), sources_by_id)
@@ -199,8 +214,10 @@ def evaluate_case(
     score += traceability_score + reference_score
     if traceability_score < 6:
         findings.append("Weak backstage traceability: expected source ids and titles in data/source_registry.csv.")
+        coverage_flags.append("weak_backstage_traceability")
     if reference_score < 2:
         findings.append("Weak reader-facing references: final.md should cite source titles or include a clean reference appendix.")
+        coverage_flags.append("weak_reader_references")
 
     leaked_source_ids = sorted(set(re.findall(r"\bS\d{3}\b", final_text)))
     if leaked_source_ids:
@@ -230,6 +247,11 @@ def evaluate_case(
         findings.append("Repeated template-like lines found; output may be list-like rather than synthesized.")
         quality_flags.append("repetition")
 
+    repeated_phrases = repeated_phrase_flags(final_text, TEMPLATE_SOURCE_LISTING_PHRASES)
+    if repeated_phrases:
+        findings.append("Repeated source-listing template phrases found: " + ", ".join(repeated_phrases))
+        quality_flags.append("source_listing_template")
+
     bullets = bullet_ratio(final_text)
     if bullets > 0.45:
         findings.append(f"High bullet-line ratio ({bullets:.0%}); inspect for source listing instead of synthesis.")
@@ -237,12 +259,13 @@ def evaluate_case(
 
     char_count = len(re.sub(r"\s+", "", final_text))
     if char_count >= 1800:
-        score += 10
+        score += 15
     elif char_count >= 900:
-        score += 5
+        score += 8
         findings.append(f"Output may be thin for this case: {char_count} non-space chars.")
     else:
         findings.append(f"Output is too short for this case: {char_count} non-space chars.")
+        coverage_flags.append("too_short")
 
     quality_penalty = min(30, 10 * len(set(quality_flags)))
     if quality_penalty:
@@ -250,7 +273,7 @@ def evaluate_case(
         findings.append(f"Quality flag penalty applied: -{quality_penalty}.")
 
     score = min(score, max_score)
-    status = "pass" if score >= 80 and not leaked and not quality_flags else "review"
+    status = "pass" if score >= 80 and not leaked and not quality_flags and not coverage_flags else "review"
     if score < 60:
         status = "fail"
 
@@ -267,6 +290,7 @@ def evaluate_case(
         "final_reference_hits": final_reference_hits,
         "char_count": char_count,
         "quality_flags": quality_flags,
+        "coverage_flags": coverage_flags,
     }
 
 

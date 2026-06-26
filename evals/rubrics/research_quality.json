@@ -2,10 +2,17 @@
   "rubric_id": "research_quality_v1",
   "title": "Industry Research Framework Research Quality Rubric",
   "scoring_note": "Use this for human review after the offline runner. The automated score catches conformance regressions; this rubric judges whether the work is actually worth reading.",
+  "taste_anchors": [
+    {
+      "case_id": "ai_agent_market_landscape_zh",
+      "high_quality": "evals/taste_anchors/ai_agent_market_landscape_zh/high_quality.md",
+      "comparison": "evals/taste_anchors/ai_agent_market_landscape_zh/baseline_vs_anchor.md"
+    }
+  ],
   "dimensions": [
     {
       "name": "brief_and_scope",
-      "weight": 15,
+      "weight": 10,
       "excellent": "Objective, reader, scope, exclusions, evidence standard, and depth are explicit before collection.",
       "poor": "The agent starts writing without clarifying or recording what the report is for."
     },
@@ -19,7 +26,7 @@
       "name": "mechanism_and_synthesis",
       "weight": 20,
       "excellent": "The report explains mechanisms, causality, tradeoffs, and implications across sources.",
-      "poor": "The report lists companies or sources without producing a thesis."
+      "poor": "The report lists companies or sources without producing a thesis. Repeated source-by-source bullets should be treated as weak even when every bullet is traceable."
     },
     {
       "name": "counter_evidence",
@@ -35,9 +42,15 @@
     },
     {
       "name": "reader_quality",
-      "weight": 15,
+      "weight": 10,
       "excellent": "The final prose reads like an authored research article or report.",
       "poor": "The final prose reads like a process transcript with source IDs, audit labels, or agent workflow language."
+    },
+    {
+      "name": "taste_anchor_alignment",
+      "weight": 10,
+      "excellent": "The output resembles the taste anchor pattern: thesis first, integrated evidence, bounded claims, analytical counter-evidence, and reader-facing prose.",
+      "poor": "The output resembles the baseline pattern: mechanically complete, dominated by bullets, repetitive source-listing phrasing, and visible eval/process language."
     }
   ],
   "pass_guidance": "A serious framework change should not be accepted only because the automated runner passes. At least one human-reviewed output should pass this rubric."

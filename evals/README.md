@@ -87,9 +87,25 @@ evals/runs/report.json
 - internal source ids do not leak into `final.md`
 - obvious eval/process language does not leak into `final.md`
 - repeated template-like lines and high bullet-line ratios are flagged for review
+- repeated source-listing templates are flagged because they show traceability without synthesis
 - output is not obviously too short
 
 These checks are intentionally mechanical. They catch regressions; they do not replace editorial judgment.
+
+## LLM Judge Status
+
+This repo does not enable an LLM judge by default. The first line of defense is deterministic:
+
+- artifact presence
+- source registry coverage
+- reader-facing references
+- process-language leakage
+- internal source-id leakage
+- bullet density
+- repeated source-listing templates
+- output length
+
+Add an LLM judge only after the deterministic runner and taste anchors are stable. A future judge should be optional, provider-neutral, and grounded in `evals/rubrics/research_quality.json`; it should explain failures rather than silently overwrite deterministic results.
 
 ## 中文说明
 
@@ -102,3 +118,5 @@ These checks are intentionally mechanical. They catch regressions; they do not r
 3. 把 `prompt.md` 交给待测 agent，让它按框架完成状态文件、台账、审阅记录和 `final.md`。
 4. 再运行 `scripts/run_evals.py` 生成 `report.md` 和 `report.json`。
 5. 你只需要看少量 A/B 输出，判断“像不像你的研究口味”；我可以把这些反馈沉淀为新 case、rubric 或 taste anchor。
+
+目前默认不启用 LLM judge。先用确定性 runner 抓状态文件、来源台账、过程语言、内部编号泄漏、列表密度和重复模板句式；等 taste anchor 和规则稳定后，再考虑增加可选的、供应商无关的 LLM judge。

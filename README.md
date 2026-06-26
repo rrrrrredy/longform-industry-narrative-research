@@ -35,6 +35,8 @@ Recommended installation modes:
 - **Codex / local coding agents**: clone this repository into the agent's skill or instructions directory, then mention `$industry-research-framework` or point the agent at `SKILL.md`.
 - **Claude / Gemini CLI / Cursor**: paste the repository URL into the session and ask the agent to read `SKILL.md` as the controlling instruction. Load `references/` files only on demand.
 - **ChatGPT or any general agent**: attach or paste `SKILL.md`, then give the task brief. If file access is available, provide the whole repository.
+- **OpenClaw**: install as a skill directory containing `SKILL.md`, for example `<workspace>/skills/industry-research-framework` or `~/.openclaw/skills/industry-research-framework`. If skill allowlists are enabled, allow the frontmatter name `industry-research-framework`. No env or API key config is required for this framework.
+- **Hermes Agent**: install as a skill under `~/.hermes/skills/industry-research-framework`, then use `/skills` to confirm it is visible and invoke it by name. If migrating from OpenClaw, use Hermes' official migration flow and verify that `SKILL.md` plus `references/` were imported.
 
 Agent-specific notes live in [`agents/`](./agents/):
 
@@ -43,6 +45,8 @@ Agent-specific notes live in [`agents/`](./agents/):
 - [`agents/gemini-cli.md`](./agents/gemini-cli.md)
 - [`agents/cursor.md`](./agents/cursor.md)
 - [`agents/chatgpt.md`](./agents/chatgpt.md)
+- [`agents/openclaw.md`](./agents/openclaw.md)
+- [`agents/hermes.md`](./agents/hermes.md)
 
 ## Example Tasks
 
@@ -314,7 +318,9 @@ industry-research-framework/
 │   ├── claude.md
 │   ├── gemini-cli.md
 │   ├── cursor.md
-│   └── chatgpt.md
+│   ├── chatgpt.md
+│   ├── openclaw.md
+│   └── hermes.md
 ├── docs/
 │   ├── index.html
 │   └── framework.html
@@ -322,7 +328,8 @@ industry-research-framework/
 │   ├── README.md
 │   ├── cases/
 │   ├── rubrics/
-│   └── source_packs/
+│   ├── source_packs/
+│   └── taste_anchors/
 ├── scripts/
 │   ├── build_sanitized_eval_set.py
 │   └── run_evals.py
@@ -386,6 +393,8 @@ This project is open source under the [MIT License](./LICENSE).
 - **Codex / 本地 coding agent**：把本仓库克隆到 agent 的 skill 或 instruction 目录，再在任务中提到 `$industry-research-framework` 或直接指向 `SKILL.md`。
 - **Claude / Gemini CLI / Cursor**：把仓库链接发给 agent，让它把 `SKILL.md` 当作控制指令；`references/` 文件只在需要对应方法时读取。
 - **ChatGPT 或通用 agent**：上传或粘贴 `SKILL.md`，再给研究任务；如果支持文件访问，直接提供整个仓库。
+- **OpenClaw**：按官方 skill 机制安装为包含 `SKILL.md` 的目录，例如 `<workspace>/skills/industry-research-framework` 或 `~/.openclaw/skills/industry-research-framework`。如果启用了 skill allowlist，请允许 frontmatter 名称 `industry-research-framework`。本框架不需要 env 或 API key 配置。
+- **Hermes Agent**：按官方 skill 机制放到 `~/.hermes/skills/industry-research-framework`，启动后用 `/skills` 确认可见，再通过技能名调用。如果从 OpenClaw 迁移到 Hermes，使用 Hermes 官方迁移流程，并确认 `SKILL.md` 和 `references/` 已导入。
 
 不同 agent 的适配说明见 [`agents/`](./agents/)：
 
@@ -394,6 +403,8 @@ This project is open source under the [MIT License](./LICENSE).
 - [`agents/gemini-cli.md`](./agents/gemini-cli.md)
 - [`agents/cursor.md`](./agents/cursor.md)
 - [`agents/chatgpt.md`](./agents/chatgpt.md)
+- [`agents/openclaw.md`](./agents/openclaw.md)
+- [`agents/hermes.md`](./agents/hermes.md)
 
 ## 真实任务示例
 

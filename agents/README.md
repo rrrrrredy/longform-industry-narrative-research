@@ -15,6 +15,8 @@ These notes explain how to use Industry Research Framework with common agents wi
 - [Gemini CLI](./gemini-cli.md)
 - [Cursor](./cursor.md)
 - [ChatGPT / general agents](./chatgpt.md)
+- [OpenClaw](./openclaw.md)
+- [Hermes Agent](./hermes.md)
 
 ## 中文说明
 
